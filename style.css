@@ -1,14 +1,14 @@
 :root {
-    font-size: 125%;
+	font-size: 125%;
 }
 
 h1, h2 {
-    font-size: 1.2rem;
-    padding-block-end: 1rem;
-    font-weight: 700;
+	font-size: 1.2rem;
+	padding-block-end: 1rem;
+	font-weight: 700;
 }
 
 p {
-    font-size: 0.8rem;
-    padding-block-end: 0.5rem;
+	font-size: 0.8rem;
+	padding-block-end: 0.5rem;
 }
