@@ -3,4 +3,8 @@
 // https://developer.chrome.com/docs/extensions/develop/concepts/match-patterns
 // https://developer.chrome.com/docs/extensions/develop/concepts/content-scripts
 
-alert("Do you really want to buy this today?");
+alert("Do you really want to buy this today?")
+
+let productName = document.querySelector('#productTitle')
+
+
