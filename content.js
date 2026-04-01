@@ -2,32 +2,17 @@
 // https://developer.chrome.com/docs/extensions/get-started/tutorial/hello-world
 // https://developer.chrome.com/docs/extensions/develop/concepts/match-patterns
 // https://developer.chrome.com/docs/extensions/develop/concepts/content-scripts
+// https://developer.chrome.com/docs/extensions/get-started/tutorial/scripts-on-every-tab
 
 // alert("Do you really want to buy this today?")
 
-// let productName = document.querySelector('#productTitle')
+let popup = "gutcheck"
+let closeButton = "close-button"
 
-
-
-let container = `
-   <h1>Extension Logo</h1>
-		<h2 id="product"></h2>
-		<p>Do you really need this today?</p>
-		<p>Here are some nearby locations with <span id="product-inline"></span> in stock.</p>
-		<p>
-			<ul>
-				<li>
-					Location 1
-				</li>
-				<li>
-					Location 2
-				</li>
-				<li>
-					Location 3
-				</li>
-			</ul>
-		</p>
-` 
+function getProductTitle () {
+    let productName = document.querySelector("#productTitle")
+}
+` ` 
 
 // Query selector setup in progress
 
