@@ -11,7 +11,7 @@
   inset-block-start: var(--padding);
   inset-inline-end: var(--padding);
   z-index: 2000000000;
-  width: 16rem;
+  width: 23rem;
   padding: calc(var(--padding) / 2);
   border: 0.05rem solid #111111;
   border-radius: 0.8rem;
@@ -26,8 +26,9 @@
   font-size: 1.5rem;
   line-height: var(--lineheight);
   font-weight: 700;
-  margin-block-end: var(--padding);
+  margin-block-end: calc(var(--padding) / 1.5);
   margin-block-start: 0;
+  text-align: center;
 }
 
 #gutcheck h2 {
