@@ -31,10 +31,8 @@ function createPopup(productTitle) {
 
 			<h2>Do you really need this today?</h2>
 
-			<h3>${productTitle}</h3>
-
 			<p>
-				Here are some nearby locations with <span>${productTitle}</span> in stock.
+				Here are some nearby locations with <span>${productTitle}</span> in stock:
 			</p>
 
 			<ul>

@@ -29,15 +29,9 @@
 #gutcheck h2 {
   font-size: 1rem;
   line-height: calc(var(--lineheight) / 1.5);
-  font-weight: 400;
-  hyphens: auto;
-}
-
-#gutcheck h3 {
-  font-size: 1rem;
-  line-height: calc(var(--lineheight) / 1.5);
   font-weight: 700;
   hyphens: auto;
+  margin-block-end: 0;
 }
 
 #gutcheck p {
@@ -46,7 +40,7 @@
   font-weight: 400;
   hyphens: auto;
   margin-block-end: 0;
-  margin-block-start: var(--padding);
+  margin-block-start: calc(var(--padding) / 4);
   padding-block: 0;
 }
 
