@@ -6,9 +6,11 @@
 
 // alert("Do you really want to buy this today?")
 
+// Variables
 let popup = "gutcheck"
-let closeButton = "close-button"
+// let closeButton = "close-button"
 
+// Get product title from Amazon
 function getProductTitle () {
 	let productName = document.querySelector("#productTitle")
 
@@ -20,6 +22,7 @@ function getProductTitle () {
 	 return titleElement.textContent.trim();
 }
 
+// Create popup with Amazon product title
 function createPopup(productTitle) {
 	return
 	`
@@ -43,6 +46,19 @@ function createPopup(productTitle) {
 			</ul>
 	` 
 }
+
+function insertPopup() {
+	if (document.getElementById(popup)) {
+		return
+	}
+
+	let insertProductTitle = getProductTitle()
+	let popupHTML = createPopup(insertProductTitle)
+
+	document.body.insertAdjacentHTML("beforeend", popupHTML)
+}
+
+insertPopup()
 
 
 
