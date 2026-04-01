@@ -34,7 +34,7 @@ function createPopup(productTitle) {
 			<h3>${productTitle}</h3>
 
 			<p>
-				Here are some nearby locations with ${productTitle} in stock.
+				Here are some nearby locations with <span>${productTitle}</span> in stock.
 			</p>
 
 			<ul>
