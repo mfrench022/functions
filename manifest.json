@@ -11,17 +11,12 @@
     "128": "images/icon-128.png"
   },
 
-      "action": {
-     "default_popup": "hello.html",
-     "default_icon": "icon.png"
-    },
 
 	"content_scripts": [
-		{
+		{	"matches": ["*://www.amazon.com/*/dp/*", "*://www.amazon.com/dp/*"],
 			"js": ["content.js"],
-			"matches": ["*://www.amazon.com/*/dp/*"],
-			"css":["style.css"]
-			
+			"css":["style.css"],
+			"run_at": "document_idle"
 		}
 	]
 }
