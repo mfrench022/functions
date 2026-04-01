@@ -7,10 +7,16 @@
 // alert("Do you really want to buy this today?")
 
 let popup = "gutcheck"
-let closeButton = "close-button"
+// let closeButton = "close-button"
 
 function getProductTitle () {
-    let productName = document.querySelector("#productTitle")
+	let productName = document.querySelector("#productTitle")
+
+	if (!productName) {
+		return "this product"
+	}
+	// had to look up how to clip the ends of a String, referenced this: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/trim
+	 return titleElement.textContent.trim();
 }
 ` ` 
 
