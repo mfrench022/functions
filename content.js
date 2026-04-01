@@ -19,15 +19,13 @@ function getProductTitle () {
 	}
 	// Wanted to make sure any whitespace on either side of the product name doesn't show up
 	// had to look up how to clip the ends of a String, referenced this: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/trim
-	 return titleElement.textContent.trim();
+	 return productName.textContent.trim();
 }
 
 // Create popup with Amazon product title
 function createPopup(productTitle) {
-	return
-	`
+	return `
 		<div id ="${popup}">
-			<button id = "${closeButton}>x<button>
 
 			<h1>Amazon Gut Check</h1>
 
