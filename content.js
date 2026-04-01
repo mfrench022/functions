@@ -5,6 +5,26 @@
 
 alert("Do you really want to buy this today?")
 
-let productName = document.querySelector('#productTitle')
+// let productName = document.querySelector('#productTitle')
 
 
+
+
+
+
+
+// Query selector setup in progress
+
+// document.addEventListened('DOMContentLoaded' () => {
+
+//     let productHeading = document.querySelector('#product')
+//     let productHeading = document.querySelector('#product-inline')
+
+//     let linkItem =
+//             `
+//             <h2>${productName}</h2>
+// 			`
+
+// 		// And puts it into the page!
+// 		channelBlocks.insertAdjacentHTML('beforeend', linkItem)
+// })
