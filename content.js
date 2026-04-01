@@ -7,7 +7,7 @@
 // alert("Do you really want to buy this today?")
 
 let popup = "gutcheck"
-// let closeButton = "close-button"
+let closeButton = "close-button"
 
 function getProductTitle () {
 	let productName = document.querySelector("#productTitle")
@@ -15,25 +15,35 @@ function getProductTitle () {
 	if (!productName) {
 		return "this product"
 	}
+	// Wanted to make sure any whitespace on either side of the product name doesn't show up
 	// had to look up how to clip the ends of a String, referenced this: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/trim
 	 return titleElement.textContent.trim();
 }
-` ` 
 
-// Query selector setup in progress
+function createPopup(productTitle) {
+	return
+	`
+		<div id ="${popup}">
+			<button id = "${closeButton}>x<button>
 
-// document.addEventListened('DOMContentLoaded' () => {
+			<h1>Amazon Gut Check</h1>
 
-//     let productHeading = document.querySelector('#product')
-//     let productHeading = document.querySelector('#product-inline')
+			<h2>Do you really need this today?</h2>
 
-//     let linkItem =
-//             `
-//             <h2>${productName}</h2>
-// 			`
+			<h3>${productTitle}</h3>
 
-// 		// And puts it into the page!
-// 		channelBlocks.insertAdjacentHTML('beforeend', linkItem)
-// })
+			<p>
+				Here are some nearby locations with ${productTitle} in stock.
+			</p>
+
+			<ul>
+				<li><button>Location 1</button></li>
+				<li><button>Location 2</button></li>
+				<li><button>Location 3</button></li>
+			</ul>
+	` 
+}
+
+
 
 
