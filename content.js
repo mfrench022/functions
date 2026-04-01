@@ -9,9 +9,25 @@
 
 
 
-
-
-
+let container = `
+   <h1>Extension Logo</h1>
+		<h2 id="product"></h2>
+		<p>Do you really need this today?</p>
+		<p>Here are some nearby locations with <span id="product-inline"></span> in stock.</p>
+		<p>
+			<ul>
+				<li>
+					Location 1
+				</li>
+				<li>
+					Location 2
+				</li>
+				<li>
+					Location 3
+				</li>
+			</ul>
+		</p>
+`
 
 // Query selector setup in progress
 
@@ -30,29 +46,3 @@
 // })
 
 
-function renderReadingTime(article) {
-  // If we weren't provided an article, we don't need to render anything.
-  if (!article) {
-    return;
-  }
-
-  const text = article.textContent;
-  const wordMatchRegExp = /[^\s]+/g; // Regular expression
-  const words = text.matchAll(wordMatchRegExp);
-  // matchAll returns an iterator, convert to array to get word count
-  const wordCount = [...words].length;
-  const readingTime = Math.round(wordCount / 200);
-  const badge = document.createElement("p");
-  // Use the same styling as the publish information in an article's header
-  badge.classList.add("color-secondary-text", "type--caption");
-  badge.textContent = `⏱️ ${readingTime} min read`;
-
-  // Support for API reference docs
-  const heading = article.querySelector("h1");
-  // Support for article docs with date
-  const date = article.querySelector("time")?.parentNode;
-
-  (date ?? heading).insertAdjacentElement("afterend", badge);
-}
-
-renderReadingTime(document.querySelector("article"));
