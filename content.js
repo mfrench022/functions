@@ -27,7 +27,7 @@ function createPopup(productTitle) {
 	return `
 		<div id ="${popup}">
 
-			<h1>Amazon Gut Check</h1>
+			<h1>Amazon Gut Check [LOGO]</h1>
 
 			<h2>Do you really need this today?</h2>
 
@@ -38,9 +38,21 @@ function createPopup(productTitle) {
 			</p>
 
 			<ul>
-				<li><button>Location 1</button></li>
-				<li><button>Location 2</button></li>
-				<li><button>Location 3</button></li>
+				<li>
+					<button>
+						<p>Location 1</p>
+					</button>
+				</li>
+				<li>
+					<button>
+						<p>Location 2</p>
+					</button>
+				</li>
+				<li>
+					<button>
+						<p>Location 3</p>
+					</button>
+				</li>
 			</ul>
 	` 
 }
