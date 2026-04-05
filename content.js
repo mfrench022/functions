@@ -27,46 +27,37 @@ function createPopup(productTitle) {
 	return `
 		<div id ="${popup}">
 
-			<h1>Amazon Gut Check [LOGO]</h1>
+			<h1>Amazon Gut Check</h1>
 
 			<h2>Do you really need this today?</h2>
 
 			<p>
-				Here are some nearby locations with <span>${productTitle}</span> in stock:
+				Want to see if <span>${productTitle}</span> is available to buy today in your area:
 			</p>
-
-			<ul>
-				<li>
-					<button>
-						<p>Location 1</p>
-					</button>
-				</li>
-				<li>
-					<button>
-						<p>Location 2</p>
-					</button>
-				</li>
-				<li>
-					<button>
-						<p>Location 3</p>
-					</button>
-				</li>
+			<button><p>Search Local</p></button>
 			</ul>
 	` 
 }
 
-function insertPopup() {
-	if (document.getElementById(popup)) {
-		return
-	}
+// Updated function for inserting popup into Amazon DOM
 
-	let insertProductTitle = getProductTitle()
-	let popupHTML = createPopup(insertProductTitle)
 
-	document.body.insertAdjacentHTML("beforeend", popupHTML)
-}
 
-insertPopup()
+
+
+// Old function for inserting popup overlay
+// function insertPopup() {
+// 	if (document.getElementById(popup)) {
+// 		return
+// 	}
+
+// 	let insertProductTitle = getProductTitle()
+// 	let popupHTML = createPopup(insertProductTitle)
+
+// 	document.body.insertAdjacentHTML("beforeend", popupHTML)
+// }
+
+// insertPopup()
 
 
 
