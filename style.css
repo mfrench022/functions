@@ -1,4 +1,4 @@
-:root {
+/* :root {
   font-size: 125%;
   --padding: 1.5rem;
   --lineheight: 2rem;
@@ -17,7 +17,6 @@
   background: #ffffff;
   box-shadow: 0 0.7rem 2rem rgba(15, 17, 17, 0.15);
   color: #111111;
-
 }
 
 #gutcheck h1 {
@@ -26,7 +25,6 @@
   font-weight: 700;
   margin-block-end: calc(var(--padding) / 1.5);
   margin-block-start: 0;
-  /* text-align: center; */
 }
 
 #gutcheck h2 {
@@ -73,4 +71,4 @@
 
 #gutcheck button p::marker {
   content: "" !important;
-}
+} */

@@ -34,8 +34,10 @@ function createPopup(productTitle) {
 			<p>
 				Want to see if <span>${productTitle}</span> is available to buy today in your area:
 			</p>
-			<button><p>Search Local</p></button>
-			</ul>
+			<button>
+				<p>Search Local</p>
+			</button>
+		</div>
 	` 
 }
 
