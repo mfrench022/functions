@@ -26,12 +26,25 @@ function createPopup(productTitle) {
 	// Did a google search for how to best insert a string into a URL and found the encodeURIComponent, which I used to embed the product name into a google search
 	// I used MDN to determine wether or not to use encodeURI vs encodeURIComponent: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/encodeURIComponent
 	// I used encodeURIComponent because it will correctly interpret the spacing and special characters like &
-	let googleSearch = encodeURIComponent(productTitle + " near me")
-
-	// Had to go down a rabbit hole on Moz to find out that all shopping traffic on google containes the parameter 'tbm=shop': https://moz.com/blog/tracking-google-shopping-traffic-with-google-analytics-14244
-	// Using this parameter I can automatically funnel users into shopping search results
+	// Added 'in stock' to improve local specificity
+	let googleSearch = encodeURIComponent(productTitle + " near me in stock")
 	let googleURL = `https://www.google.com/search?q=${googleSearch}&tbm=shop`
+	// ^^ Had to go down a rabbit hole on Moz to find out that all shopping traffic on google containes the parameter 'tbm=shop': https://moz.com/blog/tracking-google-shopping-traffic-with-google-analytics-14244
+	// Using this parameter I can automatically funnel users into shopping search results
+	
 
+
+	// I asked ChatGPT to help me identify the best way to toggle on the 'nearby' filter within google shopping by default: https://chatgpt.com/share/69d6976f-031c-8332-9b58-d36e81d287dc
+	// Unfortunately the short answer was that I can't reliably force the nearby toggle on Google shopping via the URL
+
+	// This did make me think of another possibility to bypass google shopping altogether, and to just do a google map search for the product name. In that case, the js variables would be:
+
+	// let googleSearch = encodeURIComponent(productTitle)
+	// let googleURL = `https://www.google.com/maps/search/${googleSearch}`
+
+
+
+	// Button structure borrowed from Amazon hence the weird spans
 	return `
 		<div id ="${popup}" class="a-box">
 
@@ -42,17 +55,17 @@ function createPopup(productTitle) {
 			<p>
 				Check if <span>${productTitle}</span> is available to buy today in your&nbsp;area:
 			</p>
-			<a href ="${googleURL}" target="_blank">
-				<p>Search Local</p>
-			</a>
+			<span class="a-button a-button-primary">
+				<span class="a-button-inner">
+					<a href="${googleURL}" target="_blank" class="a-button-text">Search Local</a>
+				</span>
+			</span>
 		</div>
-		<br>
 	` 
 }
 
 
 // Updated function for inserting popup into Amazon DOM
-
 function insertPopup() {
 	if (document.getElementById(popup)) {
 		return
@@ -111,6 +124,7 @@ function removeHighlight() {
 	}
 }
 
+// Also had to remind myself that hover does not work as a JS Element, and to use mouseenter/mouseleave instead: https://developer.mozilla.org/en-US/docs/Web/API/Element/mouseenter_event
 if (buyButtonOne) {
 	buyButtonOne.addEventListener("mouseenter", addHighlight)
 	buyButtonOne.addEventListener("mouseleave", removeHighlight)
