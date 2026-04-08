@@ -82,14 +82,30 @@ insertPopup()
 
 // Event listener for mouseEnter/mouseLeave on Amazon buy now buttons, adapted from course site
 let highlightClass = 'gutcheck-highlight'
-// let popup = "gutcheck"
+let popupElement = document.getElementById(popup)
 let buyButtonOne = document.querySelector("#add-to-cart-button")
-let buyButtonTwo = document.querySelector("#buy-now-button")
+let buyButtonTwo = document.querySelector("#submit\\.buy-now")
 
-buyButtonOne.addEventListener('mouseenter', () => {
-	popup.classList.toggle(highlightClass)
-})
 
-buyButtonTwo.addEventListener('mouseenter', () => {
-	popup.classList.toggle(highlightClass)
-})
+// Had to google the alternative to toggle for adding and removing classes, reminded myself of add/remove here: https://stackoverflow.com/questions/26736587/how-to-add-and-remove-classes-in-javascript-without-jquery#:~:text=Using%20classList:%20The%20%60classList%60%20property%20provides%20a,methods%20like%20%60add()%60%2C%20%60remove()%60%2C%20%60toggle()%60%2C%20and%20%60contains()%60.
+function addHighlight() {
+	if (popupElement) {
+		popupElement.classList.add(highlightClass)
+	}
+}
+
+function removeHighlight() {
+	if (popupElement) {
+		popupElement.classList.remove(highlightClass)
+	}
+}
+
+if (buyButtonOne) {
+	buyButtonOne.addEventListener("mouseenter", addHighlight)
+	buyButtonOne.addEventListener("mouseleave", removeHighlight)
+}
+
+if (buyButtonTwo) {
+	buyButtonTwo.addEventListener("mouseenter", addHighlight)
+	buyButtonTwo.addEventListener("mouseleave", removeHighlight)
+}

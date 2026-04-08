@@ -9,7 +9,8 @@
 }
 
 .gutcheck-highlight {
-	color: blue;
+	transition: 300ms ease-in-out;
+	color: #ffce12;
 }
 
 
