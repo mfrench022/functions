@@ -4,8 +4,6 @@
 // https://developer.chrome.com/docs/extensions/develop/concepts/content-scripts
 // https://developer.chrome.com/docs/extensions/get-started/tutorial/scripts-on-every-tab
 
-// alert("Do you really want to buy this today?")
-
 // Variables
 let popup = "gutcheck"
 // let closeButton = "close-button"
@@ -51,8 +49,7 @@ function insertPopup() {
 
 	// Found amazon ID for add to cart button and targeted it with a query selector:
 	let buyNowButton = document.querySelector("#add-to-cart-button").closest(".a-button")
-
-	// ^ Used closest element here because Amazon sometimes (but not always) wraps the button, so I needed to target the more general .a-button tag in those CSSNamespaceRule
+	// ^ Used closest element here because Amazon sometimes (but not always) wraps the button, so I needed to target the more general .a-button tag in those 
 	// I had to google how to do this, which led me to the closest() element on MDN: https://developer.mozilla.org/en-US/docs/Web/API/Element/closest
 
 	if (!buyNowButton) {
@@ -66,7 +63,6 @@ function insertPopup() {
 }
 
 insertPopup()
-
 
 
 // Old function for inserting popup overlay
@@ -84,5 +80,16 @@ insertPopup()
 // insertPopup()
 
 
+// Event listener for mouseEnter/mouseLeave on Amazon buy now buttons, adapted from course site
+let highlightClass = 'gutcheck-highlight'
+// let popup = "gutcheck"
+let buyButtonOne = document.querySelector("#add-to-cart-button")
+let buyButtonTwo = document.querySelector("#buy-now-button")
 
+buyButtonOne.addEventListener('mouseenter', () => {
+	popup.classList.toggle(highlightClass)
+})
 
+buyButtonTwo.addEventListener('mouseenter', () => {
+	popup.classList.toggle(highlightClass)
+})
