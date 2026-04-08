@@ -1,82 +1,85 @@
 #gutcheck .emphasis {
-  font-style: italic;
-  font-weight: 700;
+	font-style: italic;
+	font-weight: 700;
 }
 
-
+/* Had to use absolute units here because that is what Amazon uses to set their padding and I want to remain consistent */
+#gutcheck {
+	padding: 5px 11px 11px 11px;
+}
 
 
 /* :root {
-  font-size: 125%;
-  --padding: 1.5rem;
-  --lineheight: 2rem;
+	font-size: 125%;
+	--padding: 1.5rem;
+	--lineheight: 2rem;
 }
 
 #gutcheck {
-  position: fixed;
-  inset-block-start: var(--padding);
-  inset-inline-end: var(--padding);
-  z-index: 2000000000;
-  width: 23rem;
-  padding: calc(var(--padding) / 2);
-  padding-inline: var(--padding);
-  border: 0.05rem solid #111111;
-  border-radius: 0.8rem;
-  background: #ffffff;
-  box-shadow: 0 0.7rem 2rem rgba(15, 17, 17, 0.15);
-  color: #111111;
+	position: fixed;
+	inset-block-start: var(--padding);
+	inset-inline-end: var(--padding);
+	z-index: 2000000000;
+	width: 23rem;
+	padding: calc(var(--padding) / 2);
+	padding-inline: var(--padding);
+	border: 0.05rem solid #111111;
+	border-radius: 0.8rem;
+	background: #ffffff;
+	box-shadow: 0 0.7rem 2rem rgba(15, 17, 17, 0.15);
+	color: #111111;
 }
 
 #gutcheck h1 {
-  font-size: 1.4rem;
-  line-height: var(--lineheight);
-  font-weight: 700;
-  margin-block-end: calc(var(--padding) / 1.5);
-  margin-block-start: 0;
+	font-size: 1.4rem;
+	line-height: var(--lineheight);
+	font-weight: 700;
+	margin-block-end: calc(var(--padding) / 1.5);
+	margin-block-start: 0;
 }
 
 #gutcheck h2 {
-  font-size: 1rem;
-  line-height: calc(var(--lineheight) / 1.5);
-  font-weight: 700;
-  hyphens: auto;
-  margin-block-end: 0;
+	font-size: 1rem;
+	line-height: calc(var(--lineheight) / 1.5);
+	font-weight: 700;
+	hyphens: auto;
+	margin-block-end: 0;
 }
 
 #gutcheck p {
-  font-size: 0.8rem;
-  line-height: calc(var(--lineheight) / 2);
-  font-weight: 400;
-  hyphens: auto;
-  margin-block-end: 0;
-  margin-block-start: calc(var(--padding) / 4);
-  padding-block: 0;
+	font-size: 0.8rem;
+	line-height: calc(var(--lineheight) / 2);
+	font-weight: 400;
+	hyphens: auto;
+	margin-block-end: 0;
+	margin-block-start: calc(var(--padding) / 4);
+	padding-block: 0;
 }
 
 #gutcheck ul {
-  list-style: none;
-  padding: 0;
-  display: flex;
-  column-gap: calc(var(--padding) / 2);
-  margin-block-end: calc(var(--padding) / 3);
-  margin-block-start: var(--padding);
-  padding-inline: 0;
-  margin-inline: 0;
+	list-style: none;
+	padding: 0;
+	display: flex;
+	column-gap: calc(var(--padding) / 2);
+	margin-block-end: calc(var(--padding) / 3);
+	margin-block-start: var(--padding);
+	padding-inline: 0;
+	margin-inline: 0;
 }
 
 #gutcheck button p{
-  font-size: 0.6rem;
-  line-height: calc(var(--lineheight) / 3);
-  font-weight: 700;
-  margin-block: 0;
-  padding-block: calc(var(--padding) / 3);
-  list-style: none;
+	font-size: 0.6rem;
+	line-height: calc(var(--lineheight) / 3);
+	font-weight: 700;
+	margin-block: 0;
+	padding-block: calc(var(--padding) / 3);
+	list-style: none;
 }
 
 #gutcheck span {
-  font-style: italic;
+	font-style: italic;
 }
 
 #gutcheck button p::marker {
-  content: "" !important;
+	content: "" !important;
 } */
