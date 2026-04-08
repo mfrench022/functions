@@ -25,11 +25,11 @@ function getProductTitle () {
 // Create popup with Amazon product title
 function createPopup(productTitle) {
 	return `
-		<div id ="${popup}">
+		<div id ="${popup}" class="a-box">
 
 			<h1>Gut Check!</h1>
 
-			<h2>Do you really need this today?</h2>
+			<p class="emphasis">Do you really need this today?</p>
 
 			<p>
 				Check if <span>${productTitle}</span> is available to buy today in your&nbsp;area:
@@ -38,6 +38,7 @@ function createPopup(productTitle) {
 				<p>Search Local</p>
 			</button>
 		</div>
+		<br>
 	` 
 }
 
@@ -49,7 +50,10 @@ function insertPopup() {
 	}
 
 	// Found amazon ID for add to cart button and targeted it with a query selector:
-	let buyNowButton = document.querySelector("#add-to-cart-button")
+	let buyNowButton = document.querySelector("#add-to-cart-button").closest(".a-button")
+
+	// ^ Used closest element here because Amazon sometimes (but not always) wraps the button, so I needed to target the more general .a-button tag in those CSSNamespaceRule
+	// I had to google how to do this, which led me to the closest() element on MDN: https://developer.mozilla.org/en-US/docs/Web/API/Element/closest
 
 	if (!buyNowButton) {
 		return
