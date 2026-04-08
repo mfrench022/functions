@@ -23,8 +23,14 @@ function getProductTitle () {
 // Create popup with Amazon product title
 function createPopup(productTitle) {
 
+	// Did a google search for how to best insert a string into a URL and found the encodeURIComponent, which I used to embed the product name into a google search
+	// I used MDN to determine wether or not to use encodeURI vs encodeURIComponent: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/encodeURIComponent
+	// I used encodeURIComponent because it will correctly interpret the spacing and special characters like &
 	let googleSearch = encodeURIComponent(productTitle + " near me")
-	let googleURL = `https://www.google.com/search?q=${googleSearch}&tbm=lcl`
+
+	// Had to go down a rabbit hole on Moz to find out that all shopping traffic on google containes the parameter 'tbm=shop': https://moz.com/blog/tracking-google-shopping-traffic-with-google-analytics-14244
+	// Using this parameter I can automatically funnel users into shopping search results
+	let googleURL = `https://www.google.com/search?q=${googleSearch}&tbm=shop`
 
 	return `
 		<div id ="${popup}" class="a-box">
@@ -43,6 +49,7 @@ function createPopup(productTitle) {
 		<br>
 	` 
 }
+
 
 // Updated function for inserting popup into Amazon DOM
 
