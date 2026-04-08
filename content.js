@@ -27,12 +27,12 @@ function createPopup(productTitle) {
 	return `
 		<div id ="${popup}">
 
-			<h1>Amazon Gut Check</h1>
+			<h1>Gut Check!</h1>
 
 			<h2>Do you really need this today?</h2>
 
 			<p>
-				Want to see if <span>${productTitle}</span> is available to buy today in your area:
+				Check if <span>${productTitle}</span> is available to buy today in your&nbsp;area:
 			</p>
 			<button>
 				<p>Search Local</p>
@@ -43,7 +43,25 @@ function createPopup(productTitle) {
 
 // Updated function for inserting popup into Amazon DOM
 
+function insertPopup() {
+	if (document.getElementById(popup)) {
+		return
+	}
 
+	// Found amazon ID for add to cart button and targeted it with a query selector:
+	let buyNowButton = document.querySelector("#add-to-cart-button")
+
+	if (!buyNowButton) {
+		return
+	}
+
+	let insertProductTitle = getProductTitle()
+	let popupHTML = createPopup(insertProductTitle)
+
+	buyNowButton.insertAdjacentHTML("beforebegin", popupHTML)
+}
+
+insertPopup()
 
 
 
