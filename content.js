@@ -27,7 +27,7 @@ function createPopup(productTitle) {
 
 			<h1>Gut Check!</h1>
 
-			<p class="emphasis">Do you really need this today?</p>
+			<p class="emphasis">Do you <span>really</span> need this today?</p>
 
 			<p>
 				Check if <span>${productTitle}</span> is available to buy today in your&nbsp;area:

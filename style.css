@@ -1,11 +1,14 @@
 #gutcheck .emphasis {
-	font-style: italic;
 	font-weight: 700;
 }
 
 /* Had to use absolute units here because that is what Amazon uses to set their padding and I want to remain consistent */
 #gutcheck {
 	padding: 5px 11px 11px 11px;
+}
+
+#gutcheck span {
+	font-style: italic;
 }
 
 .gutcheck-highlight {
