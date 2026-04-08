@@ -11,9 +11,14 @@
 	font-style: italic;
 }
 
-.gutcheck-highlight {
-	transition: 300ms ease-in-out;
-	color: #ffce12;
+#gutcheck.gutcheck-highlight {
+	transition: 100ms ease-in-out;
+	border: 4px solid #ffa41c;
+	padding: 3px 9px 9px 9px;
+}
+
+#gutcheck.gutcheck-highlight h1 {
+	color: #ffa41c;
 }
 
 
