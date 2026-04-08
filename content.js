@@ -22,6 +22,10 @@ function getProductTitle () {
 
 // Create popup with Amazon product title
 function createPopup(productTitle) {
+
+	let googleSearch = encodeURIComponent(productTitle + " near me")
+	let googleURL = `https://www.google.com/search?q=${googleSearch}&tbm=lcl`
+
 	return `
 		<div id ="${popup}" class="a-box">
 
@@ -32,9 +36,9 @@ function createPopup(productTitle) {
 			<p>
 				Check if <span>${productTitle}</span> is available to buy today in your&nbsp;area:
 			</p>
-			<button>
+			<a href ="${googleURL}" target="_blank">
 				<p>Search Local</p>
-			</button>
+			</a>
 		</div>
 		<br>
 	` 
