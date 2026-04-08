@@ -1,5 +1,6 @@
 :root {
 	--amazon-blue: #0478ff;
+	--amazon-blue-dark: #006be5;
 	--amazon-orange: #ffa41c;
 }
 
@@ -39,6 +40,10 @@
 	font-style: normal;
 	color: white;
 	font-weight: 700;
+	}
+
+	&:hover {
+		background-color: var(--amazon-blue-dark);
 	}
 }
 
