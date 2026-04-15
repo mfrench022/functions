@@ -120,7 +120,6 @@
 	width: 100%;
 	min-width: 0;
 	box-sizing: border-box;
-	background-color: #f1f1f1;
 	z-index: 1000001;
 	pointer-events: auto;
 }
@@ -128,11 +127,13 @@
 #gutcheck .dropdown-content a {
 	color: black;
 	height: var(--amazon-button-height);
-	padding-inline-start: var(--amazon-padding);
 	text-decoration: none;
 	display: flex;
 	align-items: center;
-	justify-content: flex-start;
+	justify-content: center;
+	border-radius: var(--amazon-border-radius);
+	margin-block: var(--amazon-padding);
+	background-color: #f1f1f1;
 }
 
 #gutcheck .dropdown-content a:hover {
