@@ -89,6 +89,7 @@
 	border-end-start-radius: var(--amazon-border-radius);
 	border-start-end-radius: 0;
 	border-end-end-radius: 0;
+	color: black;
 }
 
 #gutcheck .btn2 {
