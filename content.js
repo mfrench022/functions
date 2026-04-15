@@ -57,14 +57,16 @@ function createPopup(productTitle) {
 			</p>
 
 			<div class="split-button-container">
-					<a href="${googleURL}" target="_blank" class="btn1">
-						Shop Elsewhere
-					</a>
+				<div class="split-button-row">
+						<a href="${googleURL}" target="_blank" class="btn1">
+							Shop Elsewhere
+						</a>
 
-				<div class ="dropdown">
-					<button class="btn2" type="button">
-						<i class="a-icon a-icon-extender-expand"></i>
-					</button>
+					<div class ="dropdown">
+						<button class="btn2" type="button">
+							<i class="a-icon a-icon-extender-expand"></i>
+						</button>
+					</div>
 				</div>
 
 				<div class="dropdown-content">

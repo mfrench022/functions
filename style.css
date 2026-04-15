@@ -5,6 +5,7 @@
 	--amazon-padding: 11px;
 	--amazon-button-height: 31px;
 	--amazon-border-radius: 100px;
+	--blur: blur(4px);
 }
 
 #gutcheck .emphasis {
@@ -13,7 +14,9 @@
 
 /* Had to use absolute units here because that is what Amazon uses to set their padding and I want to remain consistent */
 #gutcheck {
-	padding: 5px var(--amazon-padding) var(--amazon-padding) var(--amazon-padding);
+	padding-block-start: 5px;
+	padding-block-end: var(--amazon-padding);
+	padding-inline: var(--amazon-padding);
 	margin-block-end: calc(var(--amazon-padding) + 1px);
 	position: relative;
 	z-index: 1000000;
@@ -32,7 +35,10 @@
 #gutcheck.gutcheck-highlight {
 	transition: 100ms ease-in-out;
 	border: 2px solid var(--amazon-orange);
-	padding: 4px calc(var(--amazon-padding) - 2px) calc(var(--amazon-padding) - 1px) calc(var(--amazon-padding) - 1px);
+	padding-block-start: 4px;
+	padding-block-end: calc(var(--amazon-padding) - 1px);
+	padding-inline-start: calc(var(--amazon-padding) - 1px);
+	padding-inline-end: calc(var(--amazon-padding) - 2px);
 	box-shadow: 1px 2px 10px rgba(9, 9, 9, 0.408);
 	scale: 1.1;
 	z-index: 1000000;
@@ -62,9 +68,13 @@
 /* Had to look up how to get both elements to fit dynamically in the container, which reminded me of fit-content: https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/fit-content */
 /* This allows me to have both the button and the dropdown fit in a row */
 #gutcheck .split-button-container {
+	position: relative;
+	width: 100%;
+}
+
+#gutcheck .split-button-row {
 	display: flex;
 	align-items: stretch;
-	position: relative;
 	width: 100%;
 }
 
@@ -114,12 +124,10 @@
 
 #gutcheck .dropdown-content {
 	display: none;
-	position: absolute;
-	inset-block-start: 100%;
-	inset-inline-start: 0;
 	width: 100%;
 	min-width: 0;
 	box-sizing: border-box;
+	padding-block-start: 1px;
 	z-index: 1000001;
 	pointer-events: auto;
 }
@@ -139,10 +147,32 @@
 #gutcheck .dropdown-content a:hover {
 	background-color: #ddd;
 }
-/* Using a + operator to target the adjacent dropdown-content element */
-#gutcheck .dropdown:hover + .dropdown-content,
-#gutcheck .dropdown-content:hover {
+
+#gutcheck .dropdown-content > :last-child {
+	margin-block-end: 1px;
+}
+/* Only the icon dropdown trigger/menu should control open state */
+#gutcheck .split-button-container:has(.dropdown:hover) .dropdown-content,
+#gutcheck .split-button-container:has(.dropdown-content:hover) .dropdown-content {
 	display: block;
+}
+
+/* Using pseudo-element to create a transparent overlay that covers the entire page when the dropdown is hovered. I adapted this CSS from my previous Links project. */
+body::before {
+	content: "";
+	position: fixed;
+	inset: 0;
+	opacity: 0;
+	z-index: 999999;
+	background-color: #0f11111f;
+	backdrop-filter: blur(4px);
+	/* -webkit-backdrop-filter: blur(4px); */
+	transition: opacity 120ms ease-in-out;
+}
+
+body:has(#gutcheck .dropdown:hover)::before,
+body:has(#gutcheck .dropdown-content:hover)::before {
+	opacity: 1;
 }
 
 #gutcheck .btn1:hover,
@@ -153,7 +183,8 @@
 /* Undoing some styles from the icon I pulled from Amazon */
 #gutcheck .btn2 .a-icon {
 	display: block;
-	margin: calc(var(--amazon-padding) / 2);
+	margin-block: calc(var(--amazon-padding) / 2);
+	margin-inline: calc(var(--amazon-padding) / 2);
 }
 
 
