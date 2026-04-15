@@ -163,6 +163,7 @@ body::before {
 	position: fixed;
 	inset: 0;
 	opacity: 0;
+	pointer-events: none;
 	z-index: 999999;
 	background-color: #0f11111f;
 	backdrop-filter: blur(4px);
@@ -171,7 +172,7 @@ body::before {
 }
 
 body:has(#gutcheck .dropdown:hover)::before,
-body:has(#gutcheck .dropdown-content:hover)::before {
+body:has(#gutcheck .dropdown-content:hover)::before, body:has(#gutcheck .split-button-row:hover)::before {
 	opacity: 1;
 }
 
