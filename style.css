@@ -3,6 +3,8 @@
 	--amazon-blue-dark: #006be5;
 	--amazon-orange: #ffa41c;
 	--amazon-padding: 11px;
+	--amazon-button-height: 31px;
+	--amazon-border-radius: 100px;
 }
 
 #gutcheck .emphasis {
@@ -30,7 +32,7 @@
 	border: 2px solid var(--amazon-orange);
 	padding: 4px calc(var(--amazon-padding) - 2px) calc(var(--amazon-padding) - 1px) calc(var(--amazon-padding) - 1px);
 	box-shadow: 1px 2px 10px rgba(9, 9, 9, 0.408);
-	scale: 1.08;
+	scale: 1.1;
 	z-index: 1000000;
 	animation: jump-shaking 0.30s infinite;
 	animation-iteration-count: 2;
@@ -67,7 +69,9 @@
 #gutcheck .btn2 {
 	background-color: #2196F3;
 	color: white;
-	padding: var(--amazon-padding);
+	height: var(--amazon-button-height);
+	padding-block: 0;
+	padding-inline: var(--amazon-padding);
 	border: none;
 	outline: none;
 	display: flex;
@@ -84,10 +88,18 @@
 	flex-shrink: 1;
 	flex-basis: auto;
 	min-width: 0;
+	border-start-start-radius: var(--amazon-border-radius);
+	border-end-start-radius: var(--amazon-border-radius);
+	border-start-end-radius: 0;
+	border-end-end-radius: 0;
 }
 
 #gutcheck .btn2 {
 	cursor: pointer;
+	border-start-start-radius: 0;
+	border-end-start-radius: 0;
+	border-start-end-radius: var(--amazon-border-radius);
+	border-end-end-radius: var(--amazon-border-radius);
 }
 
 #gutcheck .dropdown {
