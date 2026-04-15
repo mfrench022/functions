@@ -35,7 +35,7 @@
 	animation-iteration-count: 3;
 }
 
-#gutcheck .a-button {
+/* #gutcheck .a-button {
 	background-color: var(--amazon-blue);
 	border-color: var(--amazon-blue);
 
@@ -48,10 +48,21 @@
 	&:hover {
 		background-color: var(--amazon-blue-dark);
 	}
-}
+} */
+
+
+/* Split button code modeled after W3's example here: https://www.w3schools.com/howto/howto_css_button_split.asp */
+
+
+
+
+
+
+
+
+
 
 /* CSS for shake animation obtained from: https://unused-css.com/blog/css-shake-animation/, I modified the values to work with my design:*/
-
 @keyframes jump-shaking {
   0% { transform: translateX(0) }
   25% { transform: translateY(-0.6rem) }
