@@ -55,11 +55,15 @@ function createPopup(productTitle) {
 			<p>
 				Check if this product is available for pickup nearby:
 			</p>
-			<div class="a-button">
+
+			
+			<div class="btn1">
 				<a href="${googleURL}" target="_blank" class="a-button-text">Shop Elsewhere</a>
 			</div>
 			<div class ="dropdown">
-				<div class="pui-icon chevron-down-grey-small"></div>
+				<div class="btn2">
+					<div class= "pui-icon chevron-down-grey-small"></div>
+				</div>
 				<div class="dropdown-content">
 					<a href="">Search Local</a>
 					<a href="">Search Bookstores</a>
