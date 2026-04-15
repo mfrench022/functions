@@ -20,8 +20,20 @@ function getProductTitle () {
 	return productName.textContent.trim();
 }
 
+// Had to write a new function to get the brand name of a product, which is generally the first word for fashion listings
+// This will allow me to search Good On You for the brand name
+function getBrand(productTitle) {
+	// I am using split() to get the first word of the product title
+	let firstWord = productTitle.split(" ")[0]
+
+	// I am using replace() to remove any punctuation from the first word
+	// I found this technique on MDN: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace
+	return firstWord.replace(/[^a-zA-Z0-9]/g, "")
+}
+
 // Create popup with Amazon product title
 function createPopup(productTitle) {
+	let brand = getBrand(productTitle)
 
 	// Did a google search for how to best insert a string into a URL and found the encodeURIComponent, which I used to embed the product name into a google search
 	// I used MDN to determine wether or not to use encodeURI vs encodeURIComponent: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/encodeURIComponent
@@ -42,15 +54,15 @@ function createPopup(productTitle) {
 	let googleMapsSearch = encodeURIComponent(productTitle)
 	let googleMapsURL = `https://www.google.com/maps/search/${googleMapsSearch}`
 
-	// 1) IndieBound
-let indieBoundSearch = encodeURIComponent(productTitle)
-let indieBoundURL = `https://www.indiebound.org/search/book?keys=${indieBoundSearch}`
+	let indieBoundSearch = encodeURIComponent(productTitle)
+	let indieBoundURL = `https://www.indiebound.org/search/book?keys=${indieBoundSearch}`
 
-let goodOnYouSearch = encodeURIComponent(`site:directory.goodonyou.eco ${productTitle}`)
-let goodOnYouURL = `https://www.google.com/search?q=${goodOnYouSearch}`
+	// Can't search Good on You directory directly, so I am using google search to find the brand name on the site:
+	let goodOnYouSearch = encodeURIComponent(`site:directory.goodonyou.eco "${brand}"`)
+	let goodOnYouURL = `https://www.google.com/search?q=${goodOnYouSearch}`
 
-let facebookMarketplaceSearch = encodeURIComponent(productTitle)
-let facebookMarketplaceURL = `https://www.facebook.com/marketplace/category/search/?query=${facebookMarketplaceSearch}`
+	let facebookMarketplaceSearch = encodeURIComponent(productTitle)
+	let facebookMarketplaceURL = `https://www.facebook.com/marketplace/category/search/?query=${facebookMarketplaceSearch}`
 
 	// I used ChatGPT to help me come up with some alternate search engines and ways of filtering results to add as alternative buttons in the dropdown: https://chatgpt.com/share/69dfda87-75ac-83ea-b4bb-62da792c3614
 	
