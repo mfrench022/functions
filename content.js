@@ -53,7 +53,7 @@ function createPopup(productTitle) {
 			<p class="emphasis">Do you <span>really</span> need this today?</p>
 
 			<p>
-				Check if <span>${productTitle}</span> is available to buy today in your&nbsp;area:
+				Check if this product is available for pickup nearby:
 			</p>
 			<span class="a-button a-button-primary">
 				<span class="a-button-inner">
