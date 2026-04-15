@@ -62,6 +62,7 @@
 #gutcheck .split-button-container {
 	display: flex;
 	align-items: stretch;
+	position: relative;
 	width: 100%;
 }
 
@@ -114,11 +115,13 @@
 #gutcheck .dropdown-content {
 	display: none;
 	position: absolute;
-	top: 100%;
-	left: 0;
+	inset-block-start: 100%;
+	inset-inline-start: 0;
+	width: 100%;
+	min-width: 0;
+	box-sizing: border-box;
 	background-color: #f1f1f1;
-	min-width: 160px;
-	z-index: 1;
+	z-index: 10;
 }
 
 /* Links inside the dropdown */
@@ -134,7 +137,8 @@
 }
 
 /* Show the dropdown menu on hover */
-#gutcheck .dropdown:hover .dropdown-content {
+#gutcheck .dropdown:hover + .dropdown-content,
+#gutcheck .dropdown-content:hover {
 	display: block;
 }
 

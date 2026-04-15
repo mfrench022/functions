@@ -65,11 +65,11 @@ function createPopup(productTitle) {
 					<button class="btn2" type="button">
 						<i class="a-icon a-icon-extender-expand"></i>
 					</button>
+				</div>
 
-					<div class="dropdown-content">
-						<a href="${googleMapsURL}" target="_blank">Search Local</a>
-						<a href="">Search Bookstores</a>
-					</div>
+				<div class="dropdown-content">
+					<a href="${googleMapsURL}" target="_blank">Search Local</a>
+					<a href="">Search Bookstores</a>
 				</div>
 
 			</div>
