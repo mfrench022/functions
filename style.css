@@ -2,6 +2,7 @@
 	--amazon-blue: #0478ff;
 	--amazon-blue-dark: #006be5;
 	--amazon-orange: #ffa41c;
+	--amazon-padding: 11px;
 }
 
 #gutcheck .emphasis {
@@ -10,8 +11,8 @@
 
 /* Had to use absolute units here because that is what Amazon uses to set their padding and I want to remain consistent */
 #gutcheck {
-	padding: 5px 11px 11px 11px;
-	margin-block-end: 12px;
+	padding: 5px var(--amazon-padding) var(--amazon-padding) var(--amazon-padding);
+	margin-block-end: calc(var(--amazon-padding) + 1px);
 }
 
 #gutcheck span {
@@ -27,7 +28,7 @@
 #gutcheck.gutcheck-highlight {
 	transition: 100ms ease-in-out;
 	border: 2px solid var(--amazon-orange);
-	padding: 4px 9px 10px 10px;
+	padding: 4px calc(var(--amazon-padding) - 2px) calc(var(--amazon-padding) - 1px) calc(var(--amazon-padding) - 1px);
 	box-shadow: 1px 2px 10px rgba(9, 9, 9, 0.408);
 	scale: 1.08;
 	z-index: 1000000;
@@ -53,25 +54,47 @@
 
 /* Split button code modeled after W3's example here: https://www.w3schools.com/howto/howto_css_button_split.asp */
 
-.btn1, .btn2 {
-  background-color: #2196F3;
-  color: white;
-  padding: 16px;
-  font-size: 16px;
-  border: none;
-  outline: none;
+
+/* Had to look up how to get both elements to fit dynamically in the container, which reminded me of fit-content: https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/fit-content */
+/* This allows me to have both the button and the dropdown fit in a row */
+.split-button-container {
+  display: flex;
+  align-items: stretch;
+  width: fit-content;
 }
 
-/* The container <div> - needed to position the dropdown content */
+.btn1,
+.btn2 {
+  background-color: #2196F3;
+  color: white;
+  padding: var(--amazon-padding);
+  border: none;
+  outline: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+}
+
+.btn1 {
+  text-decoration: none;
+}
+
+.btn2 {
+  cursor: pointer;
+}
+
 .dropdown {
-  position: absolute;
-  display: inline-block;
+  position: relative;
+  display: flex;
 }
 
 /* Dropdown Content (Hidden by Default) */
 .dropdown-content {
   display: none;
   position: absolute;
+  top: 100%;
+  left: 0;
   background-color: #f1f1f1;
   min-width: 160px;
   z-index: 1;
@@ -85,15 +108,17 @@
   display: block;
 }
 
-.dropdown-content a:hover {background-color: #ddd}
+.dropdown-content a:hover {
+  background-color: #ddd;
+}
 
 /* Show the dropdown menu on hover */
 .dropdown:hover .dropdown-content {
   display: block;
 }
 
-/* Change the background color of the dropdown button when the dropdown content is shown */
-.btn:hover, .dropdown:hover .btn  {
+.btn1:hover,
+.dropdown:hover .btn2 {
   background-color: #0b7dda;
 }
 
