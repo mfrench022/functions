@@ -17,7 +17,7 @@ function getProductTitle () {
 	}
 	// Wanted to make sure any whitespace on either side of the product name doesn't show up
 	// had to look up how to clip the ends of a String, referenced this: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/trim
-	 return productName.textContent.trim();
+	return productName.textContent.trim();
 }
 
 // Create popup with Amazon product title
@@ -39,8 +39,8 @@ function createPopup(productTitle) {
 
 	// This did make me think of another possibility to bypass google shopping altogether, and to just do a google map search for the product name. In that case, the js variables would be:
 
-	// let googleSearch = encodeURIComponent(productTitle)
-	// let googleURL = `https://www.google.com/maps/search/${googleSearch}`
+	let googleMapsSearch = encodeURIComponent(productTitle)
+	let googleMapsURL = `https://www.google.com/maps/search/${googleMapsSearch}`
 
 
 
@@ -67,7 +67,7 @@ function createPopup(productTitle) {
 					</button>
 
 					<div class="dropdown-content">
-						<a href="">Search Local</a>
+						<a href="${googleMapsURL}" target="_blank">Search Local</a>
 						<a href="">Search Bookstores</a>
 					</div>
 				</div>

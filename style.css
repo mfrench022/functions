@@ -58,75 +58,84 @@
 /* Had to look up how to get both elements to fit dynamically in the container, which reminded me of fit-content: https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/fit-content */
 /* This allows me to have both the button and the dropdown fit in a row */
 #gutcheck .split-button-container {
-  display: flex;
-  align-items: stretch;
-  width: fit-content;
+	display: flex;
+	align-items: stretch;
+	width: 100%;
 }
 
 #gutcheck .btn1,
 #gutcheck .btn2 {
-  background-color: #2196F3;
-  color: white;
-  padding: var(--amazon-padding);
-  border: none;
-  outline: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-sizing: border-box;
+	background-color: #2196F3;
+	color: white;
+	padding: var(--amazon-padding);
+	border: none;
+	outline: none;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	box-sizing: border-box;
 }
 
+/* Had to remind myself how to make the main button take up the remaining space while the dropdown stays fixed width: https://developer.mozilla.org/en-US/docs/Web/CSS/flex
+/* For this I am using flex grow set to 1 on the main button and 0 on the dropdown button */ 
 #gutcheck .btn1 {
-  text-decoration: none;
+	text-decoration: none;
+	flex-grow: 1;
+	flex-shrink: 1;
+	flex-basis: auto;
+	min-width: 0;
 }
 
 #gutcheck .btn2 {
-  cursor: pointer;
+	cursor: pointer;
 }
 
 #gutcheck .dropdown {
-  position: relative;
-  display: flex;
+	position: relative;
+	display: flex;
+	flex-grow: 0;
+	flex-shrink: 0;
+	flex-basis: auto;
 }
 
 /* Dropdown Content (Hidden by Default) */
 #gutcheck .dropdown-content {
-  display: none;
-  position: absolute;
-  top: 100%;
-  left: 0;
-  background-color: #f1f1f1;
-  min-width: 160px;
-  z-index: 1;
+	display: none;
+	position: absolute;
+	top: 100%;
+	left: 0;
+	background-color: #f1f1f1;
+	min-width: 160px;
+	z-index: 1;
 }
 
 /* Links inside the dropdown */
 #gutcheck .dropdown-content a {
-  color: black;
-  padding: 12px 16px;
-  text-decoration: none;
-  display: block;
+	color: black;
+	padding: 12px 16px;
+	text-decoration: none;
+	display: block;
 }
 
 #gutcheck .dropdown-content a:hover {
-  background-color: #ddd;
+	background-color: #ddd;
 }
 
 /* Show the dropdown menu on hover */
 #gutcheck .dropdown:hover .dropdown-content {
-  display: block;
+	display: block;
 }
 
 #gutcheck .btn1:hover,
 #gutcheck .dropdown:hover .btn2 {
-  background-color: #0b7dda;
+	background-color: #0b7dda;
 }
 
 /* Undoing some styles from the icon I pulled from Amazon */
 #gutcheck .btn2 .a-icon {
 	display: block;
 	margin: calc(var(--amazon-padding) / 2);
-  }
+}
 
 
 
@@ -138,13 +147,13 @@
 
 /* CSS for shake animation obtained from: https://unused-css.com/blog/css-shake-animation/, I modified the values to work with my design:*/
 @keyframes jump-shaking {
-  0% { transform: translateX(0) }
-  25% { transform: translateY(-0.6rem) }
-  35% { transform: translateY(-0.6rem) rotate(5deg) }
-  55% { transform: translateY(-0.6rem) rotate(-5deg) }
-  65% { transform: translateY(-0.6rem) rotate(5deg) }
-  75% { transform: translateY(-0.6rem) rotate(-5deg) }
-  100% { transform: translateY(0) rotate(0) }
+	0% { transform: translateX(0) }
+	25% { transform: translateY(-0.6rem) }
+	35% { transform: translateY(-0.6rem) rotate(5deg) }
+	55% { transform: translateY(-0.6rem) rotate(-5deg) }
+	65% { transform: translateY(-0.6rem) rotate(5deg) }
+	75% { transform: translateY(-0.6rem) rotate(-5deg) }
+	100% { transform: translateY(0) rotate(0) }
 }
 
 
