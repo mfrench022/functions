@@ -23,6 +23,7 @@
 	font-weight: 700;
 }
 
+/* Had to look up how to set animation iteration counts: https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/animation-iteration-count */
 #gutcheck.gutcheck-highlight {
 	transition: 100ms ease-in-out;
 	border: 2px solid var(--amazon-orange);
@@ -30,6 +31,8 @@
 	box-shadow: 1px 2px 10px rgba(9, 9, 9, 0.408);
 	scale: 1.08;
 	z-index: 1000000;
+	animation: jump-shaking 0.35s infinite;
+	animation-iteration-count: 3;
 }
 
 #gutcheck .a-button {
@@ -45,6 +48,18 @@
 	&:hover {
 		background-color: var(--amazon-blue-dark);
 	}
+}
+
+/* CSS for shake animation obtained from: https://unused-css.com/blog/css-shake-animation/, I modified the values to work with my design:*/
+
+@keyframes jump-shaking {
+  0% { transform: translateX(0) }
+  25% { transform: translateY(-0.6rem) }
+  35% { transform: translateY(-0.6rem) rotate(5deg) }
+  55% { transform: translateY(-0.6rem) rotate(-5deg) }
+  65% { transform: translateY(-0.6rem) rotate(5deg) }
+  75% { transform: translateY(-0.6rem) rotate(-5deg) }
+  100% { transform: translateY(0) rotate(0) }
 }
 
 
