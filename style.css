@@ -199,13 +199,13 @@ body:has(#gutcheck .dropdown-content:hover)::before, body:has(#gutcheck .split-b
 
 /* CSS for shake animation obtained from: https://unused-css.com/blog/css-shake-animation/, I modified the values to work with my design:*/
 @keyframes jump-shaking {
-	0% { transform: translateX(0) scale(1)}
+	0% { transform: translateX(0)}
 	25% { transform: translateY(-0.6rem) }
 	35% { transform: translateY(-0.6rem) rotate(5deg) }
-	55% { transform: translateY(-0.6rem) rotate(-5deg) scale(1.3)}
+	55% { transform: translateY(-0.6rem) rotate(-5deg)}
 	65% { transform: translateY(-0.6rem) rotate(5deg) }
 	75% { transform: translateY(-0.6rem) rotate(-5deg) }
-	100% { transform: translateY(0) rotate(0) scale(1.1)}
+	100% { transform: translateY(0) rotate(0)}
 }
 
 

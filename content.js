@@ -42,9 +42,19 @@ function createPopup(productTitle) {
 	let googleMapsSearch = encodeURIComponent(productTitle)
 	let googleMapsURL = `https://www.google.com/maps/search/${googleMapsSearch}`
 
+	// 1) IndieBound
+let indieBoundSearch = encodeURIComponent(productTitle)
+let indieBoundURL = `https://www.indiebound.org/search/book?keys=${indieBoundSearch}`
 
+let goodOnYouSearch = encodeURIComponent(`site:directory.goodonyou.eco ${productTitle}`)
+let goodOnYouURL = `https://www.google.com/search?q=${goodOnYouSearch}`
 
-	// Button structure borrowed from Amazon hence the weird spans
+let facebookMarketplaceSearch = encodeURIComponent(productTitle)
+let facebookMarketplaceURL = `https://www.facebook.com/marketplace/category/search/?query=${facebookMarketplaceSearch}`
+
+	// I used ChatGPT to help me come up with some alternate search engines and ways of filtering results to add as alternative buttons in the dropdown: https://chatgpt.com/share/69dfda87-75ac-83ea-b4bb-62da792c3614
+	
+	// I followed up by asking the LLM to find the unique search queries for different websites (without writing any code): https://chatgpt.com/share/69dfda87-75ac-83ea-b4bb-62da792c3614
 	return `
 		<div id ="${popup}" class="a-box">
 
@@ -70,8 +80,10 @@ function createPopup(productTitle) {
 				</div>
 
 				<div class="dropdown-content">
-					<a href="${googleMapsURL}" target="_blank">Search Local</a>
-					<a href="">Search Bookstores</a>
+					<a href="${googleMapsURL}" target="_blank">Search Nearby</a>
+					<a href="${indieBoundURL}" target="_blank">Search Local Bookstores</a>
+					<a href="${goodOnYouURL}" target="_blank">Search Sustainable Fashion</a>
+					<a href="${facebookMarketplaceURL}" target="_blank">Search Secondhand Listings</a>
 				</div>
 
 			</div>
