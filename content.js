@@ -56,7 +56,7 @@ function createPopup(productTitle) {
 				Check if this product is available for pickup nearby:
 			</p>
 
-			<div class="split-button-container a-button-text">
+			<div class="split-button-container">
 					<a href="${googleURL}" target="_blank" class="btn1">
 						Shop Elsewhere
 					</a>

@@ -32,8 +32,8 @@
 	box-shadow: 1px 2px 10px rgba(9, 9, 9, 0.408);
 	scale: 1.08;
 	z-index: 1000000;
-	animation: jump-shaking 0.35s infinite;
-	animation-iteration-count: 3;
+	animation: jump-shaking 0.30s infinite;
+	animation-iteration-count: 2;
 }
 
 /* #gutcheck .a-button {
@@ -57,14 +57,14 @@
 
 /* Had to look up how to get both elements to fit dynamically in the container, which reminded me of fit-content: https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/fit-content */
 /* This allows me to have both the button and the dropdown fit in a row */
-.split-button-container {
+#gutcheck .split-button-container {
   display: flex;
   align-items: stretch;
   width: fit-content;
 }
 
-.btn1,
-.btn2 {
+#gutcheck .btn1,
+#gutcheck .btn2 {
   background-color: #2196F3;
   color: white;
   padding: var(--amazon-padding);
@@ -76,21 +76,21 @@
   box-sizing: border-box;
 }
 
-.btn1 {
+#gutcheck .btn1 {
   text-decoration: none;
 }
 
-.btn2 {
+#gutcheck .btn2 {
   cursor: pointer;
 }
 
-.dropdown {
+#gutcheck .dropdown {
   position: relative;
   display: flex;
 }
 
 /* Dropdown Content (Hidden by Default) */
-.dropdown-content {
+#gutcheck .dropdown-content {
   display: none;
   position: absolute;
   top: 100%;
@@ -101,27 +101,32 @@
 }
 
 /* Links inside the dropdown */
-.dropdown-content a {
+#gutcheck .dropdown-content a {
   color: black;
   padding: 12px 16px;
   text-decoration: none;
   display: block;
 }
 
-.dropdown-content a:hover {
+#gutcheck .dropdown-content a:hover {
   background-color: #ddd;
 }
 
 /* Show the dropdown menu on hover */
-.dropdown:hover .dropdown-content {
+#gutcheck .dropdown:hover .dropdown-content {
   display: block;
 }
 
-.btn1:hover,
-.dropdown:hover .btn2 {
+#gutcheck .btn1:hover,
+#gutcheck .dropdown:hover .btn2 {
   background-color: #0b7dda;
 }
 
+/* Undoing some styles from the icon I pulled from Amazon */
+#gutcheck .btn2 .a-icon {
+	display: block;
+	margin: calc(var(--amazon-padding) / 2);
+  }
 
 
 
