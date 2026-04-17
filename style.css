@@ -19,7 +19,7 @@
 	padding-inline: var(--amazon-padding);
 	margin-block-end: calc(var(--amazon-padding) + 1px);
 	position: relative;
-	z-index: 1000000;
+	z-index: 197;
 }
 
 #gutcheck span {
@@ -40,9 +40,9 @@
 	padding-inline-start: calc(var(--amazon-padding) - 1px);
 	padding-inline-end: calc(var(--amazon-padding) - 2px);
 	box-shadow: 1px 2px 10px #09090968;
-	z-index: 1000000;
+	z-index: 197;
 	animation: jump-shaking 0.22s infinite, scale-change 0.22s infinite;
-	animation-iteration-count: 2;
+	animation-iteration-count: 1;
 	scale: 1.1;
 	transition: scale 0.22s ease-in-out;
 }
@@ -114,7 +114,7 @@
 	min-width: 0;
 	box-sizing: border-box;
 	padding-block-start: 1px;
-	z-index: 1000001;
+	z-index: 198;
 	pointer-events: auto;
 }
 
@@ -151,7 +151,7 @@ body::before {
 	inset: 0;
 	opacity: 0;
 	pointer-events: none;
-	z-index: 999999;
+	z-index: 196;
 	background-color: #0f11111f;
 	backdrop-filter: blur(4px);
 	-webkit-backdrop-filter: blur(4px);
