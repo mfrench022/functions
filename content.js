@@ -6,7 +6,58 @@
 
 // Variables
 let popup = "gutcheck"
-// let closeButton = "close-button"
+
+let iconCheckSVG = `<svg id="gutcheck-header-icon" width="34" height="33" viewBox="0 0 34 33" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M23.1558 31.1158C24.3156 31.1158 25.2558 30.1756 25.2558 29.0158C25.2558 27.856 24.3156 26.9158 23.1558 26.9158C21.996 26.9158 21.0558 27.856 21.0558 29.0158C21.0558 30.1756 21.996 31.1158 23.1558 31.1158Z" stroke="#0F1111" stroke-width="2.23158" stroke-miterlimit="10"/>
+<path d="M13.7959 31.1158C14.9557 31.1158 15.8959 30.1756 15.8959 29.0158C15.8959 27.856 14.9557 26.9158 13.7959 26.9158C12.6361 26.9158 11.6959 27.856 11.6959 29.0158C11.6959 30.1756 12.6361 31.1158 13.7959 31.1158Z" stroke="#0F1111" stroke-width="2.23158" stroke-miterlimit="10"/>
+<path d="M27.1958 24.1958H9.80584L9.20584 18.3358L7.43584 3.11578L1.11584 2.75578" stroke="#0F1111" stroke-width="2.23158" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M29.4958 6.79577H32.3158L27.9158 20.7958H9.48584L7.86584 6.79577H10.0758" stroke="#0F1111" stroke-width="2.23158" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M19.7958 16.3758C24.0098 16.3758 27.4258 12.9597 27.4258 8.74578C27.4258 4.53185 24.0098 1.11579 19.7958 1.11579C15.5819 1.11579 12.1658 4.53185 12.1658 8.74578C12.1658 12.9597 15.5819 16.3758 19.7958 16.3758Z" stroke="#0F1111" stroke-width="2.23158" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M22.9659 5.67579L18.4059 12.0058L15.8959 9.60578" stroke="#0F1111" stroke-width="2.23158" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>`
+
+
+// Swap icon when user clicks a search option
+// Adapted from event listener and if else demos on course site/
+
+// Had to google how to use the ! operator to check for false: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Logical_NOT
+function gutcheckIconSwap(gutcheckElement) {
+	gutcheckElement.addEventListener("click", function (e) {
+		if (gutcheckElement.dataset.headerIcon === "check") {
+			return
+		}
+
+		let link = e.target.closest("a")
+
+		if (!link) {
+			return
+		}
+
+		if (!gutcheckElement.contains(link)) {
+			return
+		}
+
+		let clickedSearchGoogle = link.classList.contains("btn1")
+		let clickedDropdownOption = link.closest(".dropdown-content")
+
+		if (link.classList.contains("btn1")) {
+			clickedSearchGoogle = true
+		} else if (link.closest(".dropdown-content")) {
+			clickedDropdownOption = true
+		}
+
+		if (!clickedSearchGoogle && !clickedDropdownOption) {
+			return
+		}
+
+		gutcheckElement.dataset.headerIcon = "check"
+		let icon = gutcheckElement.querySelector("#gutcheck-header-icon")
+
+		if (icon) {
+			icon.outerHTML = iconCheckSVG
+		}
+	})
+}
 
 // Get product title from Amazon
 function getProductTitle () {
@@ -57,10 +108,6 @@ function createPopup(productTitle) {
 	let indieBoundSearch = encodeURIComponent(productTitle)
 	let indieBoundURL = `https://www.indiebound.org/search/book?keys=${indieBoundSearch}`
 
-	// Can't search Good on You directory directly, so I am using google search to find the brand name on the site:
-	let goodOnYouSearch = encodeURIComponent(`site:directory.goodonyou.eco "${brand}"`)
-	let goodOnYouURL = `https://www.google.com/search?q=${goodOnYouSearch}`
-
 	let facebookMarketplaceSearch = encodeURIComponent(productTitle)
 	let facebookMarketplaceURL = `https://www.facebook.com/marketplace/category/search/?query=${facebookMarketplaceSearch}`
 
@@ -75,7 +122,7 @@ function createPopup(productTitle) {
 			
 			<section class="headerrow">
 				<h1>Gut Check</h1>
-				<svg width="34" height="32" viewBox="0 0 34 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+				<svg id="gutcheck-header-icon" width="34" height="32" viewBox="0 0 34 32" fill="none" xmlns="http://www.w3.org/2000/svg">
 				<path d="M23.04 31C24.1998 31 25.14 30.0598 25.14 28.9C25.14 27.7402 24.1998 26.8 23.04 26.8C21.8802 26.8 20.94 27.7402 20.94 28.9C20.94 30.0598 21.8802 31 23.04 31Z" stroke="#0F1111" stroke-width="2" stroke-miterlimit="10"/>
 				<path d="M13.68 31C14.8398 31 15.78 30.0598 15.78 28.9C15.78 27.7402 14.8398 26.8 13.68 26.8C12.5202 26.8 11.58 27.7402 11.58 28.9C11.58 30.0598 12.5202 31 13.68 31Z" stroke="#0F1111" stroke-width="2" stroke-miterlimit="10"/>
 				<path d="M27.08 24.08H9.69L9.09 18.22L7.32 3L1 2.64" stroke="#0F1111" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -146,6 +193,11 @@ function insertPopup() {
 	let popupHTML = createPopup(insertProductTitle)
 
 	buyNowButton.insertAdjacentHTML("beforebegin", popupHTML)
+
+	let gutcheckElement = document.getElementById(popup)
+	if (gutcheckElement) {
+		gutcheckIconSwap(gutcheckElement)
+	}
 }
 
 insertPopup()
