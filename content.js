@@ -12,8 +12,8 @@ let iconCheckSVG = `<svg id="gutcheck-header-icon" width="34" height="33" viewBo
 <path d="M13.7959 31.1158C14.9557 31.1158 15.8959 30.1756 15.8959 29.0158C15.8959 27.856 14.9557 26.9158 13.7959 26.9158C12.6361 26.9158 11.6959 27.856 11.6959 29.0158C11.6959 30.1756 12.6361 31.1158 13.7959 31.1158Z" stroke="#0F1111" stroke-width="2.23158" stroke-miterlimit="10"/>
 <path d="M27.1958 24.1958H9.80584L9.20584 18.3358L7.43584 3.11578L1.11584 2.75578" stroke="#0F1111" stroke-width="2.23158" stroke-linecap="round" stroke-linejoin="round"/>
 <path d="M29.4958 6.79577H32.3158L27.9158 20.7958H9.48584L7.86584 6.79577H10.0758" stroke="#0F1111" stroke-width="2.23158" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M19.7958 16.3758C24.0098 16.3758 27.4258 12.9597 27.4258 8.74578C27.4258 4.53185 24.0098 1.11579 19.7958 1.11579C15.5819 1.11579 12.1658 4.53185 12.1658 8.74578C12.1658 12.9597 15.5819 16.3758 19.7958 16.3758Z" stroke="#0F1111" stroke-width="2.23158" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M22.9659 5.67579L18.4059 12.0058L15.8959 9.60578" stroke="#0F1111" stroke-width="2.23158" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M19.7958 16.3758C24.0098 16.3758 27.4258 12.9597 27.4258 8.74578C27.4258 4.53185 24.0098 1.11579 19.7958 1.11579C15.5819 1.11579 12.1658 4.53185 12.1658 8.74578C12.1658 12.9597 15.5819 16.3758 19.7958 16.3758Z" stroke="#2ECC71" stroke-width="2.23158" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M22.9659 5.67579L18.4059 12.0058L15.8959 9.60578" stroke="#2ECC71" stroke-width="2.23158" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>`
 
 
@@ -22,12 +22,12 @@ let iconCheckSVG = `<svg id="gutcheck-header-icon" width="34" height="33" viewBo
 
 // Had to google how to use the ! operator to check for false: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Logical_NOT
 function gutcheckIconSwap(gutcheckElement) {
-	gutcheckElement.addEventListener("click", function (e) {
+	gutcheckElement.addEventListener("click", function (event) {
 		if (gutcheckElement.dataset.headerIcon === "check") {
 			return
 		}
 
-		let link = e.target.closest("a")
+		let link = event.target.closest("a")
 
 		if (!link) {
 			return
