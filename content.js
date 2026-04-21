@@ -13,8 +13,8 @@ let iconCheckSVG = `<svg id="gutcheck-header-icon" width="34" height="33" viewBo
 <path d="M13.7959 31.1158C14.9557 31.1158 15.8959 30.1756 15.8959 29.0158C15.8959 27.856 14.9557 26.9158 13.7959 26.9158C12.6361 26.9158 11.6959 27.856 11.6959 29.0158C11.6959 30.1756 12.6361 31.1158 13.7959 31.1158Z" stroke="#0F1111" stroke-width="2.23158" stroke-miterlimit="10"/>
 <path d="M27.1958 24.1958H9.80584L9.20584 18.3358L7.43584 3.11578L1.11584 2.75578" stroke="#0F1111" stroke-width="2.23158" stroke-linecap="round" stroke-linejoin="round"/>
 <path d="M29.4958 6.79577H32.3158L27.9158 20.7958H9.48584L7.86584 6.79577H10.0758" stroke="#0F1111" stroke-width="2.23158" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M19.7958 16.3758C24.0098 16.3758 27.4258 12.9597 27.4258 8.74578C27.4258 4.53185 24.0098 1.11579 19.7958 1.11579C15.5819 1.11579 12.1658 4.53185 12.1658 8.74578C12.1658 12.9597 15.5819 16.3758 19.7958 16.3758Z" stroke="#2ECC71" stroke-width="2.23158" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M22.9659 5.67579L18.4059 12.0058L15.8959 9.60578" stroke="#2ECC71" stroke-width="2.23158" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M19.7958 16.3758C24.0098 16.3758 27.4258 12.9597 27.4258 8.74578C27.4258 4.53185 24.0098 1.11579 19.7958 1.11579C15.5819 1.11579 12.1658 4.53185 12.1658 8.74578C12.1658 12.9597 15.5819 16.3758 19.7958 16.3758Z" stroke="#2EC4B6" stroke-width="2.23158" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M22.9659 5.67579L18.4059 12.0058L15.8959 9.60578" stroke="#2EC4B6" stroke-width="2.23158" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>`
 
 
@@ -27,7 +27,7 @@ function getProductTitle () {
 	}
 	// Wanted to make sure any whitespace on either side of the product name doesn't show up
 	// had to look up how to clip the ends of a String, referenced this: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/trim
-	return productName.textContent.trim();
+	return productName.textContent.trim()
 }
 
 // Had to write a new function to get the brand name of a product, which is generally the first word for fashion listings
@@ -41,6 +41,66 @@ function getBrand(productTitle) {
 	return firstWord.replace(/[^a-zA-Z0-9]/g, "")
 }
 
+
+// Per Michael's suggestion, I am writing a mutation observer to detect any attribute changes to the product, like if the user selects a different color option. I am basing this code off of MDN's example: https://developer.mozilla.org/en-US/docs/Web/API/MutationObserver/
+
+// I used ChatGPT to help me identify elements/class names/ID names in the Amazon codebase that I can target with the mutation observer: https://chatgpt.com/share/69e7eef7-2850-83e8-8153-715db83966b3
+
+function amazonMutationObserver() {
+
+// Select the node that will be observed for mutations
+const targetNode = document.body
+
+// Options for the observer (which mutations to observe)
+const config = { attributes: true,childList: true, subtree: true }
+
+// Callback function to execute when mutations are observed
+const callback = (mutationList, observer) => {
+	for (const mutation of mutationList) {
+		
+		const targetNode = mutation.target.instanceOf(amazonElement)
+
+		if (!targetNode) continue
+
+		const amazonElement = targetNode.closest(
+			`
+			#twister,
+			#twister_feature_div,
+			#tp-inline-twister-dim-values-container,
+			#inline-twister-expanded-dimension-text-color_name,
+			#inline-twister-expanded-dimension-text-size_name,
+			[data-csa-c-content-id*="twister"],
+			[id*="variation"],
+			[id*="swatch"],
+			[class*="swatch"],
+			[class*="twister"]
+			`)
+
+		if (amazonElement) {
+			observer.disconnect()
+			scheduleReload()
+			return
+		}
+
+		const observer = new MutationObserver(callback)
+		observer.observe(targetNode, config)
+
+  }
+};
+
+}
+
+
+// Create an observer instance linked to the callback function
+const observer = new MutationObserver(callback)
+
+// Start observing the target node for configured mutations
+observer.observe(targetNode, config)
+
+// Later, you can stop observing
+observer.disconnect()
+
+amazonMutationObserver()
 
 // Swap icon when user clicks a search option
 // Adapted from event listener and if else demos on course site/
@@ -83,35 +143,6 @@ function gutcheckIconSwap(gutcheckElement) {
 		}
 	})
 }
-
-
-// Per Michael's suggestion, I am writing a mutation observer to detect any attribute changes to the product, like if the user selects a different color option. I am basing this code off of MDN's example: https://developer.mozilla.org/en-US/docs/Web/API/MutationObserver/
-
-// Select the node that will be observed for mutations
-const targetNode = document.getElementById("some-id");
-
-// Options for the observer (which mutations to observe)
-const config = { attributes: true, childList: true, subtree: true };
-
-// Callback function to execute when mutations are observed
-const callback = (mutationList, observer) => {
-  for (const mutation of mutationList) {
-    if (mutation.type === "childList") {
-      console.log("A child node has been added or removed.");
-    } else if (mutation.type === "attributes") {
-      console.log(`The ${mutation.attributeName} attribute was modified.`);
-    }
-  }
-};
-
-// Create an observer instance linked to the callback function
-const observer = new MutationObserver(callback);
-
-// Start observing the target node for configured mutations
-observer.observe(targetNode, config);
-
-// Later, you can stop observing
-observer.disconnect();
 
 
 // Create popup with Amazon product title
