@@ -193,7 +193,12 @@ function insertPopup() {
 		gutcheckIconSwap(gutcheckElement)
 		gutcheckElement.classList.add(highlightClass)
 		
-		
+		// Had to google how to remove the highlight class after a certain amount of time: https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/setTimeout
+
+		// This removes the highlight class after 280ms, which is the duration of the shake animation.
+		window.setTimeout(() => {
+			gutcheckElement.classList.remove(highlightClass)
+		}, 280)
 	}
 }
 
