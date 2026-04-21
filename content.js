@@ -17,6 +17,7 @@ let iconCheckSVG = `<svg id="gutcheck-header-icon" width="34" height="33" viewBo
 <path d="M22.9659 5.67579L18.4059 12.0058L15.8959 9.60578" stroke="#2ECC71" stroke-width="2.23158" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>`
 
+
 // Get product title from Amazon
 function getProductTitle () {
 	let productName = document.querySelector("#productTitle")
@@ -39,6 +40,7 @@ function getBrand(productTitle) {
 	// I found this technique on MDN: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace
 	return firstWord.replace(/[^a-zA-Z0-9]/g, "")
 }
+
 
 // Swap icon when user clicks a search option
 // Adapted from event listener and if else demos on course site/
@@ -81,6 +83,36 @@ function gutcheckIconSwap(gutcheckElement) {
 		}
 	})
 }
+
+
+// Per Michael's suggestion, I am writing a mutation observer to detect any attribute changes to the product, like if the user selects a different color option. I am basing this code off of MDN's example: https://developer.mozilla.org/en-US/docs/Web/API/MutationObserver/
+
+// Select the node that will be observed for mutations
+const targetNode = document.getElementById("some-id");
+
+// Options for the observer (which mutations to observe)
+const config = { attributes: true, childList: true, subtree: true };
+
+// Callback function to execute when mutations are observed
+const callback = (mutationList, observer) => {
+  for (const mutation of mutationList) {
+    if (mutation.type === "childList") {
+      console.log("A child node has been added or removed.");
+    } else if (mutation.type === "attributes") {
+      console.log(`The ${mutation.attributeName} attribute was modified.`);
+    }
+  }
+};
+
+// Create an observer instance linked to the callback function
+const observer = new MutationObserver(callback);
+
+// Start observing the target node for configured mutations
+observer.observe(targetNode, config);
+
+// Later, you can stop observing
+observer.disconnect();
+
 
 // Create popup with Amazon product title
 function createPopup(productTitle) {
@@ -168,7 +200,7 @@ function createPopup(productTitle) {
 }
 
 
-// Updated function for inserting popup into Amazon DOM
+// Inserting popup into Amazon DOM
 function insertPopup() {
 	if (document.getElementById(popup)) {
 		return
@@ -203,21 +235,6 @@ function insertPopup() {
 }
 
 insertPopup()
-
-
-// Old function for inserting popup overlay
-// function insertPopup() {
-// 	if (document.getElementById(popup)) {
-// 		return
-// 	}
-
-// 	let insertProductTitle = getProductTitle()
-// 	let popupHTML = createPopup(insertProductTitle)
-
-// 	document.body.insertAdjacentHTML("beforeend", popupHTML)
-// }
-
-// insertPopup()
 
 
 // Event listener for mouseEnter/mouseLeave on Amazon buy now buttons, adapted from course site
