@@ -6,6 +6,7 @@
 
 // Variables
 let popup = "gutcheck"
+let highlightClass = "gutcheck-highlight"
 
 let iconCheckSVG = `<svg id="gutcheck-header-icon" width="34" height="33" viewBox="0 0 34 33" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path d="M23.1558 31.1158C24.3156 31.1158 25.2558 30.1756 25.2558 29.0158C25.2558 27.856 24.3156 26.9158 23.1558 26.9158C21.996 26.9158 21.0558 27.856 21.0558 29.0158C21.0558 30.1756 21.996 31.1158 23.1558 31.1158Z" stroke="#0F1111" stroke-width="2.23158" stroke-miterlimit="10"/>
@@ -16,6 +17,28 @@ let iconCheckSVG = `<svg id="gutcheck-header-icon" width="34" height="33" viewBo
 <path d="M22.9659 5.67579L18.4059 12.0058L15.8959 9.60578" stroke="#2ECC71" stroke-width="2.23158" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>`
 
+// Get product title from Amazon
+function getProductTitle () {
+	let productName = document.querySelector("#productTitle")
+
+	if (!productName) {
+		return "this product"
+	}
+	// Wanted to make sure any whitespace on either side of the product name doesn't show up
+	// had to look up how to clip the ends of a String, referenced this: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/trim
+	return productName.textContent.trim();
+}
+
+// Had to write a new function to get the brand name of a product, which is generally the first word for fashion listings
+// This will allow me to search Good On You for the brand name
+function getBrand(productTitle) {
+	// I am using split() to get the first word of the product title
+	let firstWord = productTitle.split(" ")[0]
+
+	// I am using replace() to remove any punctuation from the first word
+	// I found this technique on MDN: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace
+	return firstWord.replace(/[^a-zA-Z0-9]/g, "")
+}
 
 // Swap icon when user clicks a search option
 // Adapted from event listener and if else demos on course site/
@@ -59,33 +82,8 @@ function gutcheckIconSwap(gutcheckElement) {
 	})
 }
 
-// Get product title from Amazon
-function getProductTitle () {
-	let productName = document.querySelector("#productTitle")
-
-	if (!productName) {
-		return "this product"
-	}
-	// Wanted to make sure any whitespace on either side of the product name doesn't show up
-	// had to look up how to clip the ends of a String, referenced this: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/trim
-	return productName.textContent.trim();
-}
-
-// Had to write a new function to get the brand name of a product, which is generally the first word for fashion listings
-// This will allow me to search Good On You for the brand name
-function getBrand(productTitle) {
-	// I am using split() to get the first word of the product title
-	let firstWord = productTitle.split(" ")[0]
-
-	// I am using replace() to remove any punctuation from the first word
-	// I found this technique on MDN: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace
-	return firstWord.replace(/[^a-zA-Z0-9]/g, "")
-}
-
 // Create popup with Amazon product title
 function createPopup(productTitle) {
-	let brand = getBrand(productTitle)
-
 	// Did a google search for how to best insert a string into a URL and found the encodeURIComponent, which I used to embed the product name into a google search
 	// I used MDN to determine wether or not to use encodeURI vs encodeURIComponent: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/encodeURIComponent
 	// I used encodeURIComponent because it will correctly interpret the spacing and special characters like &
@@ -94,8 +92,6 @@ function createPopup(productTitle) {
 	let googleURL = `https://www.google.com/search?q=${googleSearch}&tbm=shop`
 	// ^^ Had to go down a rabbit hole on Moz to find out that all shopping traffic on google containes the parameter 'tbm=shop': https://moz.com/blog/tracking-google-shopping-traffic-with-google-analytics-14244
 	// Using this parameter I can automatically funnel users into shopping search results
-	
-
 
 	// I asked ChatGPT to help me identify the best way to toggle on the 'nearby' filter within google shopping by default: https://chatgpt.com/share/69d6976f-031c-8332-9b58-d36e81d287dc
 	// Unfortunately the short answer was that I can't reliably force the nearby toggle on Google shopping via the URL
@@ -118,8 +114,6 @@ function createPopup(productTitle) {
 	// SVGs obtained from: https://lucide.dev/icons/
 	return `
 		<div id ="${popup}" class="a-box">
-
-			
 			<section class="headerrow">
 				<h1>Gut Check</h1>
 				<svg id="gutcheck-header-icon" width="34" height="32" viewBox="0 0 34 32" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -197,6 +191,9 @@ function insertPopup() {
 	let gutcheckElement = document.getElementById(popup)
 	if (gutcheckElement) {
 		gutcheckIconSwap(gutcheckElement)
+		gutcheckElement.classList.add(highlightClass)
+		
+		
 	}
 }
 
@@ -219,7 +216,6 @@ insertPopup()
 
 
 // Event listener for mouseEnter/mouseLeave on Amazon buy now buttons, adapted from course site
-let highlightClass = 'gutcheck-highlight'
 let popupElement = document.getElementById(popup)
 let buyButtonOne = document.querySelector("#add-to-cart-button")
 let buyButtonTwo = document.querySelector("#submit\\.buy-now")
