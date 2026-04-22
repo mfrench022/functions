@@ -222,10 +222,43 @@ function gutcheckIconSwap(gutcheckElement) {
 	})
 }
 
+// Event listener for mouseEnter/mouseLeave on Amazon buy now buttons, adapted from course site
+function addHighlight() {
+	let popupElement = document.getElementById(popup)
+
+	if (popupElement) {
+		popupElement.classList.add(highlightClass)
+	}
+}
+
+function removeHighlight() {
+	let popupElement = document.getElementById(popup)
+
+	if (popupElement) {
+		popupElement.classList.remove(highlightClass)
+	}
+}
+
+function triggerHighlight() {
+	let buyButtonOne = document.querySelector("#add-to-cart-button")
+	let buyButtonTwo = document.querySelector("#submit\\.buy-now")
+
+	if (buyButtonOne) {
+		buyButtonOne.onmouseenter = addHighlight
+		buyButtonOne.onmouseleave = removeHighlight
+	}
+
+	if (buyButtonTwo) {
+		buyButtonTwo.onmouseenter = addHighlight
+		buyButtonTwo.onmouseleave = removeHighlight
+	}
+}
+
 
 // Inserting popup into Amazon DOM
 function insertPopup() {
 	if (document.getElementById(popup)) {
+		triggerHighlight()
 		return
 	}
 
@@ -251,6 +284,7 @@ function insertPopup() {
 	let gutcheckElement = document.getElementById(popup)
 	if (gutcheckElement) {
 		gutcheckIconSwap(gutcheckElement)
+		triggerHighlight()
 		gutcheckElement.classList.add(highlightClass)
 		
 		// Had to google how to remove the highlight class after a certain amount of time: https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/setTimeout
@@ -264,34 +298,3 @@ function insertPopup() {
 
 insertPopup()
 watchAmazonChanges()
-
-
-// Event listener for mouseEnter/mouseLeave on Amazon buy now buttons, adapted from course site
-let popupElement = document.getElementById(popup)
-let buyButtonOne = document.querySelector("#add-to-cart-button")
-let buyButtonTwo = document.querySelector("#submit\\.buy-now")
-
-
-// Had to google the alternative to toggle for adding and removing classes, reminded myself of add/remove here: https://stackoverflow.com/questions/26736587/how-to-add-and-remove-classes-in-javascript-without-jquery#:~:text=Using%20classList:%20The%20%60classList%60%20property%20provides%20a,methods%20like%20%60add()%60%2C%20%60remove()%60%2C%20%60toggle()%60%2C%20and%20%60contains()%60.
-function addHighlight() {
-	if (popupElement) {
-		popupElement.classList.add(highlightClass)
-	}
-}
-
-function removeHighlight() {
-	if (popupElement) {
-		popupElement.classList.remove(highlightClass)
-	}
-}
-
-// Also had to remind myself that hover does not work as a JS Element, and to use mouseenter/mouseleave instead: https://developer.mozilla.org/en-US/docs/Web/API/Element/mouseenter_event
-if (buyButtonOne) {
-	buyButtonOne.addEventListener("mouseenter", addHighlight)
-	buyButtonOne.addEventListener("mouseleave", removeHighlight)
-}
-
-if (buyButtonTwo) {
-	buyButtonTwo.addEventListener("mouseenter", addHighlight)
-	buyButtonTwo.addEventListener("mouseleave", removeHighlight)
-}
