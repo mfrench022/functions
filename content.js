@@ -27,17 +27,6 @@ function getProductTitle () {
 	return productName.textContent.trim()
 }
 
-// Had to write a new function to get the brand name of a product, which is generally the first word for fashion listings
-// This will allow me to search Good On You for the brand name
-function getBrand(productTitle) {
-	// I am using split() to get the first word of the product title
-	let firstWord = productTitle.split(" ")[0]
-
-	// I am using replace() to remove any punctuation from the first word
-	// I found this technique on MDN: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace
-	return firstWord.replace(/[^a-zA-Z0-9]/g, "")
-}
-
 
 // Create popup HTML + link buttons for different search engines
 function createPopup(productTitle) {
@@ -130,7 +119,7 @@ function createPopup(productTitle) {
 // I used ChatGPT to help me identify elements/class names/ID names in the Amazon codebase that I can target with the mutation observer: https://chatgpt.com/share/69e7eef7-2850-83e8-8153-715db83966b3
 
 function watchAmazonChanges() {
-	// Select the node that will be observed for mutations
+	// Select the node that will be observed for mutations (in this case, the body of the Amazon page)
 	let targetNode = document.body
 
 	// Options for the observer (which mutations to observe)
@@ -152,8 +141,9 @@ function watchAmazonChanges() {
 				}
 			}
 
-			// This is 
+			// This is checking if the popup was removed from the page
 			let popupWasRemoved = false
+			
 			if (mutation.removedNodes) {
 				popupWasRemoved = Array.from(mutation.removedNodes).some(function (node) {
 					if (node.id === popup) {
