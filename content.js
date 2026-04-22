@@ -125,7 +125,7 @@ function watchAmazonChanges() {
 	// Adding this to prevent errors if the target node is not found
 	if (!targetNode) {
 		return
-	  }
+	}
 
 	// Options for the observer (which mutations to observe)
 	let config = { attributes: true, childList: true, subtree: true }
@@ -163,12 +163,6 @@ function watchAmazonChanges() {
 				})
 			}
 
-			if (changedOption) {
-				clearTimeout(timer)
-				timer = window.setTimeout(insertPopup, 500)
-				return
-			}
-			
 			// Had to remind myself what the || operator does: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Logical_OR
 			if (changedOption || popupWasRemoved) {
 				clearTimeout(timer)
@@ -202,12 +196,6 @@ function gutcheckIconSwap(gutcheckElement) {
 
 		let clickedSearchGoogle = link.classList.contains("btn1")
 		let clickedDropdownOption = link.closest(".dropdown-content")
-
-		if (link.classList.contains("btn1")) {
-			clickedSearchGoogle = true
-		} else if (link.closest(".dropdown-content")) {
-			clickedDropdownOption = true
-		}
 
 		if (!clickedSearchGoogle && !clickedDropdownOption) {
 			return
