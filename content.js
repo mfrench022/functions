@@ -122,6 +122,11 @@ function watchAmazonChanges() {
 	// Select the node that will be observed for mutations (in this case, the body of the Amazon page)
 	let targetNode = document.body
 
+	// Adding this to prevent errors if the target node is not found
+	if (!targetNode) {
+		return
+	  }
+
 	// Options for the observer (which mutations to observe)
 	let config = { attributes: true, childList: true, subtree: true }
 
@@ -149,6 +154,8 @@ function watchAmazonChanges() {
 					if (node.id === popup) {
 						return true
 					}
+
+					// Using Boolean() to convert the result of the querySelector to a boolean value and using # to
 					if (node.querySelector) {
 						return Boolean(node.querySelector("#" + popup))
 					}
