@@ -22,9 +22,6 @@ let iconCheckSVG = `<svg id="gutcheck-header-icon" width="34" height="33" viewBo
 function getProductTitle () {
 	let productName = document.querySelector("#productTitle")
 
-	if (!productName) {
-		return "this product"
-	}
 	// Wanted to make sure any whitespace on either side of the product name doesn't show up
 	// had to look up how to clip the ends of a String, referenced this: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/trim
 	return productName.textContent.trim()
@@ -42,110 +39,7 @@ function getBrand(productTitle) {
 }
 
 
-// Per Michael's suggestion, I am writing a mutation observer to detect any attribute changes to the product, like if the user selects a different color option. I am basing this code off of MDN's example: https://developer.mozilla.org/en-US/docs/Web/API/MutationObserver/
-
-// I used ChatGPT to help me identify elements/class names/ID names in the Amazon codebase that I can target with the mutation observer: https://chatgpt.com/share/69e7eef7-2850-83e8-8153-715db83966b3
-
-function amazonMutationObserver() {
-
-// Select the node that will be observed for mutations
-const targetNode = document.body
-
-// Options for the observer (which mutations to observe)
-const config = { attributes: true,childList: true, subtree: true }
-
-// Callback function to execute when mutations are observed
-const callback = (mutationList, observer) => {
-	for (const mutation of mutationList) {
-		
-		const targetNode = mutation.target.instanceOf(amazonElement)
-
-		if (!targetNode) continue
-
-		const amazonElement = targetNode.closest(
-			`
-			#twister,
-			#twister_feature_div,
-			#tp-inline-twister-dim-values-container,
-			#inline-twister-expanded-dimension-text-color_name,
-			#inline-twister-expanded-dimension-text-size_name,
-			[data-csa-c-content-id*="twister"],
-			[id*="variation"],
-			[id*="swatch"],
-			[class*="swatch"],
-			[class*="twister"]
-			`)
-
-		if (amazonElement) {
-			observer.disconnect()
-			scheduleReload()
-			return
-		}
-
-		const observer = new MutationObserver(callback)
-		observer.observe(targetNode, config)
-
-  }
-};
-
-}
-
-
-// Create an observer instance linked to the callback function
-const observer = new MutationObserver(callback)
-
-// Start observing the target node for configured mutations
-observer.observe(targetNode, config)
-
-// Later, you can stop observing
-observer.disconnect()
-
-amazonMutationObserver()
-
-// Swap icon when user clicks a search option
-// Adapted from event listener and if else demos on course site/
-
-// Had to google how to use the ! operator to check for false: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Logical_NOT
-function gutcheckIconSwap(gutcheckElement) {
-	gutcheckElement.addEventListener("click", function (event) {
-		if (gutcheckElement.dataset.headerIcon === "check") {
-			return
-		}
-
-		let link = event.target.closest("a")
-
-		if (!link) {
-			return
-		}
-
-		if (!gutcheckElement.contains(link)) {
-			return
-		}
-
-		let clickedSearchGoogle = link.classList.contains("btn1")
-		let clickedDropdownOption = link.closest(".dropdown-content")
-
-		if (link.classList.contains("btn1")) {
-			clickedSearchGoogle = true
-		} else if (link.closest(".dropdown-content")) {
-			clickedDropdownOption = true
-		}
-
-		if (!clickedSearchGoogle && !clickedDropdownOption) {
-			return
-		}
-
-		gutcheckElement.dataset.headerIcon = "check"
-		let icon = gutcheckElement.querySelector("#gutcheck-header-icon")
-
-		if (icon) {
-			icon.outerHTML = iconCheckSVG
-		}
-	})
-}
-
-
-// Create popup with Amazon product title
+// Create popup HTML + link buttons for different search engines
 function createPopup(productTitle) {
 	// Did a google search for how to best insert a string into a URL and found the encodeURIComponent, which I used to embed the product name into a google search
 	// I used MDN to determine wether or not to use encodeURI vs encodeURIComponent: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/encodeURIComponent
@@ -160,6 +54,10 @@ function createPopup(productTitle) {
 	// Unfortunately the short answer was that I can't reliably force the nearby toggle on Google shopping via the URL
 
 	// This did make me think of another possibility to bypass google shopping altogether, and to just do a google map search for the product name. In that case, the js variables would be:
+	
+	// I used ChatGPT to help me come up with some alternate search engines and ways of filtering results to add as alternative buttons in the dropdown: https://chatgpt.com/share/69dfda87-75ac-83ea-b4bb-62da792c3614
+	
+	// I followed up by asking the LLM to find the unique search queries for different websites (without writing any code): https://chatgpt.com/share/69dfda87-75ac-83ea-b4bb-62da792c3614
 
 	let googleMapsSearch = encodeURIComponent(productTitle)
 	let googleMapsURL = `https://www.google.com/maps/search/${googleMapsSearch}`
@@ -169,10 +67,6 @@ function createPopup(productTitle) {
 
 	let facebookMarketplaceSearch = encodeURIComponent(productTitle)
 	let facebookMarketplaceURL = `https://www.facebook.com/marketplace/category/search/?query=${facebookMarketplaceSearch}`
-
-	// I used ChatGPT to help me come up with some alternate search engines and ways of filtering results to add as alternative buttons in the dropdown: https://chatgpt.com/share/69dfda87-75ac-83ea-b4bb-62da792c3614
-	
-	// I followed up by asking the LLM to find the unique search queries for different websites (without writing any code): https://chatgpt.com/share/69dfda87-75ac-83ea-b4bb-62da792c3614
 
 	// SVGs obtained from: https://lucide.dev/icons/
 	return `
@@ -231,6 +125,107 @@ function createPopup(productTitle) {
 }
 
 
+// Per Michael's suggestion, I am writing a mutation observer to detect any attribute changes to the product, like if the user selects a different color option. I am basing this code off of MDN's example: https://developer.mozilla.org/en-US/docs/Web/API/MutationObserver/
+
+// I used ChatGPT to help me identify elements/class names/ID names in the Amazon codebase that I can target with the mutation observer: https://chatgpt.com/share/69e7eef7-2850-83e8-8153-715db83966b3
+
+function watchAmazonChanges() {
+	// Select the node that will be observed for mutations
+	let targetNode = document.body
+
+	// Options for the observer (which mutations to observe)
+	let config = { attributes: true, childList: true, subtree: true }
+
+	// Timer to debounce the reload (this is what I was missing before!)
+	let timer
+	
+	let observer = new MutationObserver(function (mutationList) {
+		for (let mutation of mutationList) {
+
+			let changedOption = false
+
+			// Here I am chceking if the target node is a child of any of the Amazon targets provided by ChatGPT
+			if (mutation.target.closest) {
+				let optionNode = mutation.target.closest("#twister, [id*='variation'], [id*='swatch'], [class*='swatch'], [class*='twister']")
+				if (optionNode) {
+					changedOption = true
+				}
+			}
+
+			// This is 
+			let popupWasRemoved = false
+			if (mutation.removedNodes) {
+				popupWasRemoved = Array.from(mutation.removedNodes).some(function (node) {
+					if (node.id === popup) {
+						return true
+					}
+					if (node.querySelector) {
+						return Boolean(node.querySelector("#" + popup))
+					}
+					return false
+				})
+			}
+
+			if (changedOption) {
+				clearTimeout(timer)
+				timer = window.setTimeout(insertPopup, 500)
+				return
+			}
+			
+			// Had to remind myself what the || operator does: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Logical_OR
+			if (changedOption || popupWasRemoved) {
+				clearTimeout(timer)
+				timer = window.setTimeout(insertPopup, 500)
+				return
+			}
+		}
+	})
+	// Start observing the target node for configured mutations
+	observer.observe(targetNode, config)
+}
+
+
+// Swap icon when user clicks a search option
+// Adapted from event listener and if else demos on course site/
+function gutcheckIconSwap(gutcheckElement) {
+	gutcheckElement.addEventListener("click", function (event) {
+		if (gutcheckElement.dataset.headerIcon === "check") {
+			return
+		}
+
+		let link = event.target.closest("a")
+
+		if (!link) {
+			return
+		}
+
+		if (!gutcheckElement.contains(link)) {
+			return
+		}
+
+		let clickedSearchGoogle = link.classList.contains("btn1")
+		let clickedDropdownOption = link.closest(".dropdown-content")
+
+		if (link.classList.contains("btn1")) {
+			clickedSearchGoogle = true
+		} else if (link.closest(".dropdown-content")) {
+			clickedDropdownOption = true
+		}
+
+		if (!clickedSearchGoogle && !clickedDropdownOption) {
+			return
+		}
+
+		gutcheckElement.dataset.headerIcon = "check"
+		let icon = gutcheckElement.querySelector("#gutcheck-header-icon")
+
+		if (icon) {
+			icon.outerHTML = iconCheckSVG
+		}
+	})
+}
+
+
 // Inserting popup into Amazon DOM
 function insertPopup() {
 	if (document.getElementById(popup)) {
@@ -238,7 +233,12 @@ function insertPopup() {
 	}
 
 	// Found amazon ID for add to cart button and targeted it with a query selector:
-	let buyNowButton = document.querySelector("#add-to-cart-button").closest(".a-button")
+	let addToCartButton = document.querySelector("#add-to-cart-button")
+	if (!addToCartButton) {
+		return
+	}
+
+	let buyNowButton = addToCartButton.closest(".a-button")
 	// ^ Used closest element here because Amazon sometimes (but not always) wraps the button, so I needed to target the more general .a-button tag in those 
 	// I had to google how to do this, which led me to the closest() element on MDN: https://developer.mozilla.org/en-US/docs/Web/API/Element/closest
 
@@ -266,6 +266,7 @@ function insertPopup() {
 }
 
 insertPopup()
+watchAmazonChanges()
 
 
 // Event listener for mouseEnter/mouseLeave on Amazon buy now buttons, adapted from course site
