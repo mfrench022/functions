@@ -1,31 +1,12 @@
-# Michael French Type and Interaction Project 04
-## Links
-### This is a project for type and interaction class focused on creating an interactive, responsive webpage that displays external content from Are.na. We used Are.na as our CMS for this project, and used Javascript to import content via the Are.na API. CSS and Javascript were also used to set up interactions and style the page.
+# GutCheck
+## Built by Michael French for Type and Interaction Project 04: Functions
 
-### Theme - Staying in Style:
-The original Are.na channel was curated by Soko Mungunsukh, and it explores the concept of “style” as inner logic rather than an external aesthetic, inspired by Charles Bukowski’s poem "Style."
+### Project Description
+This is a project for type and interaction class in which we were challenged to create a product that solves a real-world problem. Impulse shopping on Amazon is a big issue for me, because the company has made its offering dangerously frictionless, to the point where two clicks result in a package at your doorstep the next day. GutCheck is a friction layer for Amazon that helps intercept the user's attention at the key moment of decision making, urging them to consider other options like shopping locally or secondhand.
 
-### Lexend Font:
-Designed by Bonnie Shaver-Troup, Thomas Jockin, Santiago Orozco, Héctor Gómez, Superunion
+### Project Structure
+GutCheck is an extension for Google Chrome that is inserted directly into the Amazon interface. As such, many of the styles are pulled directly from Amazon, or modified slightly to fit the extensions design system. This includes the extension's typeface, Amazon Ember, icons, and colors. The project has three main files. The CSS file modifies Amazon's styles as needed, and creates any new styles needed for the extension. The Javascript file containes the core functionality of the extension.
 
-
-Copyright 2018 The Lexend Project Authors (https://github.com/googlefonts/lexend), with Reserved Font Name “RevReading Lexend”.
-
-
-This Font Software is licensed under the SIL Open Font License, Version 1.1 . This license is copied below, and is also available with a FAQ at: https://openfontlicense.org
-
-
-
-SIL OPEN FONT LICENSE Version 1.1 - 26 February 2007
-
-### Rock Salt Font:
-Designed by Sideshow
-
-
-Apache License
-
-
-Version 2.0, January 2004
-
-
-http://www.apache.org/licenses/
+### More of Michael's Work
+Check out my other projects from Type and Interaction: https://michaelfrench.co/project-index/
+See my portfolio: [michaelfrench.co](https://michaelfrench.co/)
